@@ -8,10 +8,11 @@ import { Container, Content, Form, Title, FormTitle } from '../styles';
 import { IUserEntity } from '../../../shared/iuser';
 import { ISchedule } from '../../../shared/ischedule';
 import { IOptionProps } from '../../../shared/iselectinput';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Updatechedule: React.FC = () => {
     const navigate = useNavigate();
+    const scheduleId = useParams()
     const [options, setOptions] = useState<Array<IOptionProps>>([])
     const [id, setId] = useState<number>()
     const [title, setTitle] = useState<string>('')
@@ -30,7 +31,7 @@ const Updatechedule: React.FC = () => {
         }
 
         async function getSchedule(){
-            const response = await Api.get('schedule/myscheldule/1')
+            const response = await Api.get(`schedule/myscheldule/${scheduleId.id}`)
             setId(response.data.id)
             setTitle(response.data.Title)
             setCategory(response.data.Category)
@@ -46,7 +47,7 @@ const Updatechedule: React.FC = () => {
     async function handleUpdate() {
         let schedule: ISchedule
         schedule = {
-            id: userId,
+            id: id,
             title: title,
             category: category,
             localization: localization,

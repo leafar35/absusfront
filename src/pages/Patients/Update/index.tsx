@@ -4,12 +4,13 @@ import Cep from '../../../services/cep';
 import Input from '../../../components/Inputs';
 import Button from '../../../components/Buttom';
 import { MdPerson } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { IPatient } from '../../../shared/ipatient';
 import { Container, Content, Form, Title, FormTitle } from '../styles';
 
 const CreatePatient: React.FC = () => {
     const navigate = useNavigate();
+    const patientId = useParams()
     const [id, setId] = useState<number>(0)
     const [name, setName] = useState<string>('')
     const [cpf, setCpf] = useState<number>(0)
@@ -25,7 +26,7 @@ const CreatePatient: React.FC = () => {
 
     useEffect(() => {
         async function getPatientForUpdate() {
-            const response = await Api.get('patients')
+            const response = await Api.get(`patients/${patientId.id}`)
             setId(response.data.id)
             setName(response.data.name)
             setCpf(response.data.cpf)
