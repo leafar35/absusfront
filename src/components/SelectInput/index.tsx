@@ -1,14 +1,6 @@
 import React from 'react';
 import { Container } from './styles';
-
-interface ISelectInputProps {
-    options: {
-        value: string | number,
-        label: string | number,
-    }[],
-    change(event: React.ChangeEvent<HTMLSelectElement>) : void,
-    defaultValue?: string | number;
-}
+import { ISelectInputProps } from '../../shared/iselectinput';
 
 const SelectInput: React.FC<ISelectInputProps> = ({ options, change,  defaultValue }) => {
     return (

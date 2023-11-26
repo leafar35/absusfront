@@ -1,15 +1,9 @@
 import React from 'react';
+import { ISchedule } from '../../shared/ischedule';
 import { Container } from './styles';
 
-interface IPatientProps {
-    id: number,
-    title: string,
-    category: string,
-    email: string,
-}
-
-const Patients: React.FC<IPatientProps> = ({
-    id, title, category, email, 
+const Schedule: React.FC<ISchedule> = ({
+    id, title, category, localization, schedule, userId 
 }) => {
 
     return (
@@ -18,10 +12,11 @@ const Patients: React.FC<IPatientProps> = ({
                 <span>{id}</span>
                 <small>{title}</small>
                 <small>{category}</small>
-                <small>{email}</small>
+                <small>{localization}</small>
+                <small>{userId}</small>
             </div>
         </Container>
     );
 }
 
-export default Patients;
+export default Schedule;

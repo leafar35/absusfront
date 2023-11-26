@@ -37,9 +37,9 @@ const Aside: React.FC = () => {
                     <MdOutlineSchedule />
                     Agendamentos
                 </MenuItemLink>
-                <MenuItemLink href="/list/exit-balance">
+                <MenuItemLink href="/patients">
                     <MdPerson />
-                    Usuários
+                    Pacientes
                 </MenuItemLink>
                 <MenuItemButtom onClick={() => sigOuth()}>
                     <MdExitToApp />
