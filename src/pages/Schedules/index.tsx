@@ -35,7 +35,7 @@ const List: React.FC = () => {
                             key={item.id}
                             id={item.id}
                             title={item.title}
-                            category={item.title}
+                            category={item.category}
                             localization={item.localization}
                             schedule={item.schedule}
                             userId={item.userId}

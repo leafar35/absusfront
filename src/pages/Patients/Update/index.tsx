@@ -36,6 +36,9 @@ const CreatePatient: React.FC = () => {
             setNeighborhood(response.data.neighborhood)
             setComplment(response.data.complement)
             setNumber(response.data.number)
+            setEmail(response.data.user.email)
+            setCellphone(response.data.user.cellphone)
+            setPassword(response.data.user.password)
         }
         getPatientForUpdate()
     },[])
@@ -96,12 +99,14 @@ const CreatePatient: React.FC = () => {
                         type="text"
                         placeholder="Nome"
                         required
+                        value={name}
                         onChange={ (e) => setName(e.target.value) }
                     />
                     <Input 
                         type="text"
                         placeholder="CPF"
                         required
+                        value={cpf}
                         onChange={ (e) => setCpf(parseInt(e.target.value)) }
                     />
 
@@ -109,6 +114,7 @@ const CreatePatient: React.FC = () => {
                         type="date"
                         placeholder="Data de Nacimento"
                         required
+                        value={dateofbirth}
                         onChange={ (e) => setDateOfBirth(e.target.value) }
                     />
 
@@ -157,6 +163,7 @@ const CreatePatient: React.FC = () => {
                         type="text"
                         placeholder="E-mail"
                         required
+                        value={email}
                         onChange={ (e) => setEmail(e.target.value) }
                     />
 
@@ -164,6 +171,7 @@ const CreatePatient: React.FC = () => {
                         type="text"
                         placeholder="Celular"
                         required
+                        value={cellphone}
                         onChange={ (e) => setCellphone(e.target.value) }
                     />
 
@@ -171,6 +179,7 @@ const CreatePatient: React.FC = () => {
                         type="password"
                         placeholder="Senha de acesso"
                         required
+                        value={password}
                         onChange={ (e) => setPassword(e.target.value) }
                     />
 

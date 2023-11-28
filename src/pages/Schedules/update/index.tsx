@@ -24,6 +24,7 @@ const Updatechedule: React.FC = () => {
     useEffect(() => {
         async function getUsers(){
             const response = await Api.get('user')
+            console.log(response)
             const usermap = response.data.map((user: IUserEntity) => {
                 return { label: user.name, value: user.id} 
             })
@@ -31,7 +32,7 @@ const Updatechedule: React.FC = () => {
         }
 
         async function getSchedule(){
-            const response = await Api.get(`schedule/myscheldule/${scheduleId.id}`)
+            const response = await Api.get(`schedule/${scheduleId.id}`)
             setId(response.data.id)
             setTitle(response.data.Title)
             setCategory(response.data.Category)
