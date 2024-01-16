@@ -10,7 +10,7 @@ const Patients: React.FC = () => {
 
     useEffect(() => {
         async function getPatients() {
-            const response = await Api.get('patients')
+            const response = await Api.get('peoples')
             setData(response.data)   
         }
         getPatients()

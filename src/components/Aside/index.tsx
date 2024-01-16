@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import logoImg from '../../assets/logo.jpeg';
 import { MdDashboard, MdOutlineSchedule, MdPerson, MdExitToApp, MdClose, MdMenu } from 'react-icons/md';
 import { Container, Header, LogImg, Title, MenuContainer, MenuItemLink, MenuItemButtom, ToggleMenu, ThemeToggleFooter } from './styles';
-import { useAuth } from '../../hooks/auth';
-import { useTheme } from '../../hooks/theme';
+import { useTheme } from '../../contexts/theme';
 import Toggle from '../Toggle';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Aside: React.FC = () => {
-    const { sigOuth } = useAuth();
+    const { sigOuth } = useContext(AuthContext)
     const { toggleTheme, theme } = useTheme();
     const [ toggleMenuIsOpened, setToggleMenuIsOpened ] = useState(false);
     const [ dartkTheme, setDarkTheme ] = useState(() => theme.title === 'dark' ? true : false);

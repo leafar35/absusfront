@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SingIn from "../pages/SingIn";
+import { SingIn } from "../pages/SingIn";
 
 const AuthRoutes: React.FC = () => {
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Api from '../../../services/api';
 import Cep from '../../../services/cep';
 import Input from '../../../components/Inputs';
@@ -19,7 +19,6 @@ const CreatePatient: React.FC = () => {
     const [complment, setComplment] = useState<string>('')
     const [neighborhood, setNeighborhood] = useState<string>('')
     const [email, setEmail] = useState<string>('')
-    const [cellphone, setCellphone] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
     async function handleCreate(event: React.FormEvent<HTMLFormElement>) {
@@ -35,8 +34,7 @@ const CreatePatient: React.FC = () => {
             neighborhood: neighborhood,
             complement: complment,
             user: {
-                email: email,
-                cellphone: cellphone,
+                email_cellphone: email,
                 password: password
             }
         }
@@ -140,13 +138,6 @@ const CreatePatient: React.FC = () => {
                         placeholder="E-mail"
                         required
                         onChange={ (e) => setEmail(e.target.value) }
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Celular"
-                        required
-                        onChange={ (e) => setCellphone(e.target.value) }
                     />
 
                     <Input

@@ -23,7 +23,7 @@ const CreateSchedule: React.FC = () => {
         async function getUsers(){
             const response = await Api.get('user')
             const usermap = response.data.map((user: IUserEntity) => {
-                return { label: user.email, value: user.id} 
+                return { label: user.email_cellphone, value: user.id} 
             })
             setOptions(usermap)
         }

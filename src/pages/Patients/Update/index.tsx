@@ -21,7 +21,6 @@ const CreatePatient: React.FC = () => {
     const [complment, setComplment] = useState<string>('')
     const [neighborhood, setNeighborhood] = useState<string>('')
     const [email, setEmail] = useState<string>('')
-    const [cellphone, setCellphone] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
     useEffect(() => {
@@ -37,11 +36,10 @@ const CreatePatient: React.FC = () => {
             setComplment(response.data.complement)
             setNumber(response.data.number)
             setEmail(response.data.user.email)
-            setCellphone(response.data.user.cellphone)
             setPassword(response.data.user.password)
         }
         getPatientForUpdate()
-    },[])
+    },[patientId.id])
 
     async function handleCreate(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -57,8 +55,7 @@ const CreatePatient: React.FC = () => {
             neighborhood: neighborhood,
             complement: complment,
             user: {
-                email: email,
-                cellphone: cellphone,
+                email_cellphone: email,
                 password: password
             }
         }
@@ -165,14 +162,6 @@ const CreatePatient: React.FC = () => {
                         required
                         value={email}
                         onChange={ (e) => setEmail(e.target.value) }
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Celular"
-                        required
-                        value={cellphone}
-                        onChange={ (e) => setCellphone(e.target.value) }
                     />
 
                     <Input

@@ -17,8 +17,7 @@ const Patient: React.FC<IPatientProps> = ({
                 <span>{id}</span>
                 <small>{name}</small>
                 <small>{dateofbirth.toString()}</small>
-                <small>{user?.email}</small>
-                <small>{user?.cellphone}</small>
+                <small>{user?.email_cellphone}</small>
             </div>
         </Container>
     );

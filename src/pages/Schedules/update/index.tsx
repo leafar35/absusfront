@@ -26,7 +26,7 @@ const Updatechedule: React.FC = () => {
             const response = await Api.get('user')
             console.log(response)
             const usermap = response.data.map((user: IUserEntity) => {
-                return { label: user.name, value: user.id} 
+                return { label: user.email_cellphone, value: user.id} 
             })
             setOptions(usermap)
         }

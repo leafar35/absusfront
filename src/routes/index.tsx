@@ -1,11 +1,12 @@
-import React from 'react';
+import { useContext } from 'react';
 import App from './app.routes';
 import AuthRoutes from './auth.routes';
+import { AuthContext } from '../contexts/AuthContext';
 
-const Routes: React.FC = () => {
-    
+export function Routes() {
+    const { logged } = useContext(AuthContext);
     return (
-        (true) ? <App /> : <AuthRoutes />
+        (logged) ? <App /> : <AuthRoutes />
     )
 };
 

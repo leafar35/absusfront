@@ -1,35 +1,43 @@
-import React, { useState } from 'react';
-import { Container, Logo, FormTitle, Form } from './styles';
-import logoImg from '../../assets/logo.svg';
+import { FormEvent, useContext } from 'react';
+import logoImg from '../../assets/logo.jpeg';
 import Input from '../../components/Inputs';
 import Button from '../../components/Buttom';
-import { useAuth } from '../../hooks/auth';
+import { AuthContext } from '../../contexts/AuthContext';
+import { Container, Logo, FormTitle, Form } from './styles';
 
+export function SingIn() {
+    const { signIn } = useContext(AuthContext);
 
-const SingIn: React.FC = () => {
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const { signIn } = useAuth();
+    function handleLogin(e: FormEvent<HTMLFormElement>){
+        const email = (e.currentTarget.elements[0] as HTMLInputElement).value
+        const password = (e.currentTarget.elements[1] as HTMLInputElement).value
+        e.preventDefault()
+        signIn({
+            email_cellphone: email,
+            password: password
+        })
+    }
+
     return (
         <Container>
             <Logo>
-                <img src={logoImg} alt="Minha Carteira" />
-                <h2>Minha Carteira</h2>
+                <img src={logoImg} alt="Absus" />
+                <h2>Entrar</h2>
             </Logo>
-            <Form onSubmit={() => signIn(email, password) }>
+            <Form onSubmit={handleLogin}>
                 <FormTitle>Entrar</FormTitle>
 
                 <Input 
-                    type="email"
-                    placeholder="e-mail"
+                    name='email_cellphone'
+                    type="text"
+                    placeholder="E-mail ou Telefone"
                     required
-                    onChange={ (e) => setEmail(e.target.value) }
                 />
-                <Input 
+                <Input
+                    name='password'
                     type="password"
                     placeholder="senha"
                     required
-                    onChange={ (e) => setPassword(e.target.value) }
                 />
 
                 <Button type="submit">Acessar</Button>
@@ -37,5 +45,3 @@ const SingIn: React.FC = () => {
         </Container>
     );
 }
-
-export default SingIn;
