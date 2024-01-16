@@ -1,16 +1,16 @@
 import Api from '../../services/api';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Title, Actions, Schedule, Content } from './styles';
 import { MdPerson, MdOutlineAddCircle } from "react-icons/md";
 import { IPatient } from '../../shared/ipatient';
 import Patient from '../../components/Patient';
 
-const Patients: React.FC = () => {
+export function Patients(){
     const [data, setData] = useState<IPatient[]>([]);
 
     useEffect(() => {
         async function getPatients() {
-            const response = await Api.get('peoples')
+            const response = await Api.get('people')
             setData(response.data)   
         }
         getPatients()
@@ -44,5 +44,3 @@ const Patients: React.FC = () => {
         </Container>
     );
 }
-
-export default Patients;

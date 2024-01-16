@@ -5,6 +5,7 @@ import { Container, Header, LogImg, Title, MenuContainer, MenuItemLink, MenuItem
 import { useTheme } from '../../contexts/theme';
 import Toggle from '../Toggle';
 import { AuthContext } from '../../contexts/AuthContext';
+import { Link } from 'react-router-dom';
 
 const Aside: React.FC = () => {
     const { sigOuth } = useContext(AuthContext)
@@ -29,18 +30,18 @@ const Aside: React.FC = () => {
             </Header>
 
             <MenuContainer>
-                <MenuItemLink href="/">
+                <Link to="/">
                     <MdDashboard />
                     Dashboard
-                </MenuItemLink>
-                <MenuItemLink href="/schedules">
+                </Link>
+                <Link to="/schedules">
                     <MdOutlineSchedule />
                     Agendamentos
-                </MenuItemLink>
-                <MenuItemLink href="/patients">
+                </Link>
+                <Link to="/patients">
                     <MdPerson />
                     Pacientes
-                </MenuItemLink>
+                </Link>
                 <MenuItemButtom onClick={() => sigOuth()}>
                     <MdExitToApp />
                     Sair

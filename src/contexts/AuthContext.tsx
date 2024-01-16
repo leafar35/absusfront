@@ -1,7 +1,8 @@
 import Auth from '../services/auth';
 import { IProfileEntity } from '../shared/iprofile';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { IAuthProvider, IChildrenAuthProvider } from '../shared/auth';
+import Api from '../services/api';
 
 export const AuthContext = createContext<IAuthProvider>(null!);
 
@@ -11,15 +12,16 @@ function AuthProvider({ children }: IChildrenAuthProvider) {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [profile, setProfile] = useState<IProfileEntity>(null!)
 
-    const getProfile = async() => {
-        const {data} = await Auth.get('authemployee/me',{
-            headers:{
-                Authorization: `bearer ${accessToken}`
+    useEffect(() => {
+        const getProfile = async() => {
+            if(accessToken){
+                const {data} = await Auth.get('authemployee/me')
+                setProfile(data.data)
+                setIsLoading(false)
             }
-        })
-        setProfile(data.data)
-        setIsLoading(false)
-    }
+        }
+        getProfile()
+    },[accessToken])
 
     const signIn = async (inputData: any) => {
         try{
@@ -33,14 +35,14 @@ function AuthProvider({ children }: IChildrenAuthProvider) {
             setAccessToken(data.data.accessToken)
             setLogged(true);
             setIsLoading(false)
+            Api.defaults.headers.common['Authorization'] = `bearer ${data.data.accessToken}`
+            Auth.defaults.headers.common['Authorization'] = `bearer ${data.data.accessToken}`
         }catch(e){
             setLogged(false);
             setIsLoading(false)
             if(e instanceof Error){
                 alert(e.message)
             }
-        }finally{
-            getProfile()
         }
     }
 
