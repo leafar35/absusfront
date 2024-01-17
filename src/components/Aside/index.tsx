@@ -34,6 +34,10 @@ const Aside: React.FC = () => {
                     <MdDashboard />
                     Dashboard
                 </Link>
+                <Link to="/employees">
+                    <MdPerson />
+                    Funcionários
+                </Link>
                 <Link to="/schedules">
                     <MdOutlineSchedule />
                     Agendamentos
