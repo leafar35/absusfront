@@ -122,7 +122,6 @@ export default function CreateEmployee(){
                         type="text"
                         name='complement'
                         placeholder="Complemento"
-                        required                        
                     />
 
                     <Input
