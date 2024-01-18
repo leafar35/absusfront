@@ -10,5 +10,7 @@ export interface IEmployee {
 	address: string,
 	number: number,
 	complement: string,
+	city: string,
+	state: string,
 	user: IUserEntity
 }

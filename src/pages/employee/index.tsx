@@ -24,7 +24,7 @@ export default function Employee(){
                 Funcionários
             </Title>
             <Actions>
-                <Link to='/employee/create'>
+                <Link to='/employees/create'>
                     <MdOutlineAddCircle />
                     Cadastrar
                 </Link>

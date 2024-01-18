@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { FocusEvent, useState } from 'react';
 import Api from '../../../services/api';
 import Cep from '../../../services/cep';
 import Input from '../../../components/Inputs';
@@ -10,51 +10,45 @@ import { IEmployee } from '../../../shared/iemployee';
 
 export default function CreateEmployee(){
     const navigate = useNavigate();
-    const [name, setName] = useState<string>('')
-    const [cpf, setCpf] = useState<number>(0)
-    const [dateofbirth, setDateOfBirth] = useState<string>('')
-    const [zipcode, setZipcode] = useState<string>('')
     const [address, setAddress] = useState<string>('')
-    const [number, setNumber] = useState<number>(0)
-    const [complment, setComplment] = useState<string>('')
+    const [number, setNumber] = useState<string>('0')
     const [neighborhood, setNeighborhood] = useState<string>('')
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
 
-    async function handleCreate(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        let patient: IEmployee
-        patient = {
-            name: name,
-            cpf: cpf,
-            dateofbirth: new Date(dateofbirth),
-            zipcode: zipcode,
-            address: address,
-            number: number,
-            neighborhood: neighborhood,
-            complement: complment,
+    async function handleCreate(e: any) {
+        e.preventDefault();
+        let employee: IEmployee
+        employee = {
+            name: e.target[0].value,
+            cpf: e.target[1].value,
+            dateofbirth: new Date(e.target[2].value),
+            zipcode: e.target[3].value,
+            address: e.target[4].value,
+            neighborhood: e.target[5].value,
+            number: e.target[6].value,
+            complement: e.target[7].value,
+            city: e.target[8].value,
+            state: e.target[9].value,
             user: {
-                email_cellphone: email,
-                password: password
+                email_cellphone: e.target[10].value,
+                password: e.target[11].value
             }
         }
-        console.log(patient)
-        const response = await Api.post('patients', patient)
+        const response = await Api.post('employee', employee)
         if(response.data){
             return alert('sucesso')
         }
         alert('error')
     }
 
-    async function findAddress(){
-        if(zipcode.length >= 8){
-          const response = await Cep.get(`${zipcode}/json/`)
-          setZipcode(response.data.cep)
-          setAddress(response.data.logradouro)
-          setNeighborhood(response.data.bairro)
-          setComplment(response.data.complemento)
+    function findAddress(event: FocusEvent<HTMLInputElement, Element>){
+        if(event.target.value.length >= 8){
+            Cep.get(`${event.target.value}/json/`).then((response) => {
+                setAddress(response.data.logradouro)
+                setNeighborhood(response.data.bairro)
+                setNumber(response.data.numero)
+            })
         }
-      }
+    }
 
     function handleGoBack(){        
         navigate(-1)
@@ -74,77 +68,89 @@ export default function CreateEmployee(){
 
                     <Input 
                         type="text"
+                        name='name'
                         placeholder="Nome"
                         required
-                        onChange={ (e) => setName(e.target.value) }
                     />
                     <Input 
                         type="text"
+                        name='cpf'
                         placeholder="CPF"
                         required
-                        onChange={ (e) => setCpf(parseInt(e.target.value)) }
                     />
 
                     <Input 
                         type="date"
+                        name='dateofbirth'
                         placeholder="Data de Nacimento"
                         required
-                        onChange={ (e) => setDateOfBirth(e.target.value) }
                     />
 
                     <Input
                         type="text"
                         placeholder="CEP"
                         required
-                        value={zipcode}
-                        onBlur={() => findAddress()}
-                        onChange={ (e) => setZipcode(e.target.value) }
+                        name='zipcode'
+                        onBlur={findAddress}
                     />
 
                     <Input
                         type="text"
+                        name='address'
                         placeholder="Endereço"
                         required
                         value={address}
-                        onChange={ (e) => setAddress(e.target.value) }
                     />
 
                     <Input
                         type="text"
                         placeholder="Bairro"
                         required
+                        name='neighborhood'
                         value={neighborhood}
-                        onChange={ (e) => setNeighborhood(e.target.value) }
                     />
 
                     <Input
                         type="text"
                         placeholder="Número"
                         required
+                        name='number'
                         value={number}
-                        onChange={ (e) => setNumber(parseInt(e.target.value)) }
                     />
 
                     <Input
                         type="text"
+                        name='complement'
                         placeholder="Complemento"
+                        required                        
+                    />
+
+                    <Input
+                        type="text"
+                        name='city'
+                        placeholder="Cidade"
                         required
-                        value={complment}
-                        onChange={ (e) => setComplment(e.target.value) }
+                    />
+
+                    <Input
+                        type="text"
+                        name='state'
+                        placeholder="Estado"
+                        required
                     />
 
                     <Input
                         type="text"
                         placeholder="E-mail"
                         required
-                        onChange={ (e) => setEmail(e.target.value) }
+                        name='email'
                     />
 
                     <Input
                         type="password"
                         placeholder="Senha de acesso"
                         required
-                        onChange={ (e) => setPassword(e.target.value) }
+                        name='password'
                     />
 
                     <Button type="submit">Cadastrar</Button>

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
 import Api from '../../../services/api';
 import Cep from '../../../services/cep';
+import { MdPerson } from "react-icons/md";
 import Input from '../../../components/Inputs';
 import Button from '../../../components/Buttom';
-import { MdPerson } from "react-icons/md";
+import React, { useEffect, useState } from 'react';
+import { IEmployee } from '../../../shared/iemployee';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Container, Content, Form, Title, FormTitle } from '../styles';
-import { IEmployee } from '../../../shared/iemployee';
 
 export default function UpdateEmployee() {
     const navigate = useNavigate();
@@ -20,12 +20,14 @@ export default function UpdateEmployee() {
     const [number, setNumber] = useState<number>(0)
     const [complment, setComplment] = useState<string>('')
     const [neighborhood, setNeighborhood] = useState<string>('')
+    const [city, setCity] = useState<string>('')
+    const [state, setState] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
     useEffect(() => {
         async function getPatientForUpdate() {
-            const response = await Api.get(`patients/${patientId.id}`)
+            const response = await Api.get(`employee/${patientId.id}`)
             setId(response.data.id)
             setName(response.data.name)
             setCpf(response.data.cpf)
@@ -35,6 +37,8 @@ export default function UpdateEmployee() {
             setNeighborhood(response.data.neighborhood)
             setComplment(response.data.complement)
             setNumber(response.data.number)
+            setCity(response.data.city)
+            setState(response.data.state)
             setEmail(response.data.user.email)
             setPassword(response.data.user.password)
         }
@@ -43,8 +47,8 @@ export default function UpdateEmployee() {
 
     async function handleCreate(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        let patient: IEmployee
-        patient = {
+        let employee: IEmployee
+        employee = {
             id: id,
             name: name,
             cpf: cpf,
@@ -54,12 +58,14 @@ export default function UpdateEmployee() {
             number: number,
             neighborhood: neighborhood,
             complement: complment,
+            city: city,
+            state: state,
             user: {
                 email_cellphone: email,
                 password: password
             }
         }
-        const response = await Api.post('patients', patient)
+        const response = await Api.post('employee', employee)
         if(response.data){
             return alert('sucesso')
         }
@@ -154,6 +160,22 @@ export default function UpdateEmployee() {
                         required
                         value={complment}
                         onChange={ (e) => setComplment(e.target.value) }
+                    />
+
+                    <Input
+                        type="text"
+                        name='city'
+                        placeholder="Cidade"
+                        required
+                        value={city}
+                    />
+
+                    <Input
+                        type="text"
+                        name='state'
+                        placeholder="Estado"
+                        required
+                        value={state}
                     />
 
                     <Input

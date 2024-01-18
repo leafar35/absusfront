@@ -21,8 +21,8 @@ export default function AppRoutes(){
                 <Route path="/" element={<DefaultLayout />}>
                     <Route path="" element={<Dashboard />} />
                     <Route path="/employees" element={<Employee />} />
-                    <Route path="/employee/create" element={<CreateEmployee />} />
-                    <Route path="/employee/update/:id" element={<UpdateEmployee />} />
+                    <Route path="/employees/create" element={<CreateEmployee />} />
+                    <Route path="/employees/update/:id" element={<UpdateEmployee />} />
                     <Route path="/schedules" element={<List />} />
                     <Route path="/schedules/create" element={<CreateSchedule />} />
                     <Route path="/schedules/update/:id" element={<Updatechedule />} />
