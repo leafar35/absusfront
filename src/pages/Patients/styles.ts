@@ -6,8 +6,6 @@ export const Container = styled.div``;
 
 export const Actions = styled.div``
 
-export const Schedule = styled.a``
-
 export const Title = styled.h1`
     margin-bottom: 40px;
     justify-content: center;
@@ -20,7 +18,7 @@ export const Logo = styled.div`
 `;
 
 export const Form = styled.form`
-    width: 300px;
+    width: 100%;
     height: 300px;
     padding: 30px;
     border-radius: 10px;

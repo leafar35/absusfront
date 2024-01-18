@@ -22,6 +22,7 @@ export default function UpdateEmployee() {
     const [neighborhood, setNeighborhood] = useState<string>('')
     const [city, setCity] = useState<string>('')
     const [state, setState] = useState<string>('')
+    const [idUser, setIdUser] = useState<number | undefined>(undefined)
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
@@ -39,7 +40,8 @@ export default function UpdateEmployee() {
             setNumber(response.data.number)
             setCity(response.data.city)
             setState(response.data.state)
-            setEmail(response.data.user.email)
+            setIdUser(response.data.user.id)
+            setEmail(response.data.user.email_cellphone)
             setPassword(response.data.user.password)
         }
         getPatientForUpdate()
@@ -61,11 +63,12 @@ export default function UpdateEmployee() {
             city: city,
             state: state,
             user: {
+                id: idUser,
                 email_cellphone: email,
                 password: password
             }
         }
-        const response = await Api.post('employee', employee)
+        const response = await Api.put('employee', employee)
         if(response.data){
             return alert('sucesso')
         }
@@ -194,7 +197,7 @@ export default function UpdateEmployee() {
                         onChange={ (e) => setPassword(e.target.value) }
                     />
 
-                    <Button type="submit">Cadastrar</Button>
+                    <Button type="submit">Atualizar</Button>
                     <Button type="button" onClick={() => handleGoBack()}>Voltar</Button>
                 </Form>
             </Content>

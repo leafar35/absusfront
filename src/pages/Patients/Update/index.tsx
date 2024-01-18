@@ -15,27 +15,37 @@ const CreatePatient: React.FC = () => {
     const [name, setName] = useState<string>('')
     const [cpf, setCpf] = useState<number>(0)
     const [dateofbirth, setDateOfBirth] = useState<string>('')
+    const [number_sus, setNumberSus] = useState<number>(0)
+    const [number_post, setNumberPost] = useState<number>(0)
     const [zipcode, setZipcode] = useState<string>('')
     const [address, setAddress] = useState<string>('')
     const [number, setNumber] = useState<number>(0)
     const [complment, setComplment] = useState<string>('')
     const [neighborhood, setNeighborhood] = useState<string>('')
+    const [city, setCity] = useState<string>('')
+    const [state, setState] = useState<string>('')
+    const [userId, setUserId] = useState<number | undefined>()
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
     useEffect(() => {
         async function getPatientForUpdate() {
-            const response = await Api.get(`patients/${patientId.id}`)
+            const response = await Api.get(`people/${patientId.id}`)
             setId(response.data.id)
             setName(response.data.name)
             setCpf(response.data.cpf)
             setDateOfBirth(response.data.dateofbirth)
+            setNumberSus(response.data.number_sus)
+            setNumberPost(response.data.number_post)
             setZipcode(response.data.zipcode)
             setAddress(response.data.address)
             setNeighborhood(response.data.neighborhood)
             setComplment(response.data.complement)
             setNumber(response.data.number)
-            setEmail(response.data.user.email)
+            setCity(response.data.city)
+            setState(response.data.state)
+            setUserId(response.data.user.id)
+            setEmail(response.data.user.email_cellphone)
             setPassword(response.data.user.password)
         }
         getPatientForUpdate()
@@ -49,17 +59,22 @@ const CreatePatient: React.FC = () => {
             name: name,
             cpf: cpf,
             dateofbirth: new Date(dateofbirth),
+            number_sus: number_sus,
+            number_post: number_post,
             zipcode: zipcode,
             address: address,
             number: number,
             neighborhood: neighborhood,
             complement: complment,
+            city: city,
+            state: state,
             user: {
+                id: userId,
                 email_cellphone: email,
                 password: password
             }
         }
-        const response = await Api.post('patients', patient)
+        const response = await Api.put('people', patient)
         if(response.data){
             return alert('sucesso')
         }
@@ -70,6 +85,7 @@ const CreatePatient: React.FC = () => {
         if(zipcode.length >= 8){
           const response = await Cep.get(`${zipcode}/json/`)
           setZipcode(response.data.cep)
+          setNumber(response.data.numero)
           setAddress(response.data.logradouro)
           setNeighborhood(response.data.bairro)
           setComplment(response.data.complemento)
@@ -89,7 +105,7 @@ const CreatePatient: React.FC = () => {
             <Content>
                 <Form onSubmit={handleCreate}>
                     <FormTitle>
-                        Cadastrar
+                        Atualizar Paciente
                     </FormTitle>
 
                     <Input 
@@ -112,6 +128,22 @@ const CreatePatient: React.FC = () => {
                         placeholder="Data de Nacimento"
                         required
                         value={dateofbirth}
+                        onChange={ (e) => setDateOfBirth(e.target.value) }
+                    />
+
+                    <Input 
+                        type="text"
+                        placeholder="Número do sus"
+                        required
+                        value={number_sus}
+                        onChange={ (e) => setDateOfBirth(e.target.value) }
+                    />
+
+                    <Input 
+                        type="text"
+                        placeholder="Número do Posto"
+                        required
+                        value={number_post}
                         onChange={ (e) => setDateOfBirth(e.target.value) }
                     />
 
@@ -151,9 +183,22 @@ const CreatePatient: React.FC = () => {
                     <Input
                         type="text"
                         placeholder="Complemento"
-                        required
                         value={complment}
                         onChange={ (e) => setComplment(e.target.value) }
+                    />
+
+                    <Input
+                        type="text"
+                        placeholder="Cidade"
+                        value={city}
+                        onChange={ (e) => setCity(e.target.value) }
+                    />
+
+                    <Input
+                        type="text"
+                        placeholder="Estado"
+                        value={state}
+                        onChange={ (e) => setState(e.target.value) }
                     />
 
                     <Input
@@ -172,7 +217,7 @@ const CreatePatient: React.FC = () => {
                         onChange={ (e) => setPassword(e.target.value) }
                     />
 
-                    <Button type="submit">Cadastrar</Button>
+                    <Button type="submit">Atualizar</Button>
                     <Button type="button" onClick={() => handleGoBack()}>Voltar</Button>
                 </Form>
             </Content>

@@ -1,9 +1,10 @@
 import Api from '../../services/api';
 import { useState, useEffect } from 'react';
-import { Container, Title, Actions, Schedule, Content } from './styles';
+import { Container, Title, Actions, Content } from './styles';
 import { MdPerson, MdOutlineAddCircle } from "react-icons/md";
 import { IPatient } from '../../shared/ipatient';
 import Patient from '../../components/Patient';
+import { Link } from 'react-router-dom';
 
 export function Patients(){
     const [data, setData] = useState<IPatient[]>([]);
@@ -23,10 +24,10 @@ export function Patients(){
                 Pacientes
             </Title>
             <Actions>
-                <Schedule href='/patients/create'>
+                <Link to='/patients/create'>
                     <MdOutlineAddCircle />
                     Cadastrar
-                </Schedule>
+                </Link>
             </Actions>
             <Content>
                 {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FocusEvent, useState } from 'react';
 import Api from '../../../services/api';
 import Cep from '../../../services/cep';
 import Input from '../../../components/Inputs';
@@ -10,44 +10,43 @@ import { Container, Content, Form, Title, FormTitle } from '../styles';
 
 const CreatePatient: React.FC = () => {
     const navigate = useNavigate();
-    const [name, setName] = useState<string>('')
-    const [cpf, setCpf] = useState<number>(0)
-    const [dateofbirth, setDateOfBirth] = useState<string>('')
     const [zipcode, setZipcode] = useState<string>('')
     const [address, setAddress] = useState<string>('')
-    const [number, setNumber] = useState<number>(0)
+    const [number, setNumber] = useState<string>('0')
     const [complment, setComplment] = useState<string>('')
     const [neighborhood, setNeighborhood] = useState<string>('')
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
 
-    async function handleCreate(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
+    async function handleCreate(e: any) {
+        e.preventDefault();
         let patient: IPatient
         patient = {
-            name: name,
-            cpf: cpf,
-            dateofbirth: new Date(dateofbirth),
-            zipcode: zipcode,
-            address: address,
-            number: number,
-            neighborhood: neighborhood,
-            complement: complment,
+            name: e.target[0].value,
+            cpf: e.target[1].value,
+            dateofbirth: new Date(e.target[2].value),
+            number_sus: e.target[3].value,
+            number_post: e.target[4].value,
+            zipcode: e.target[5].value,
+            address: e.target[6].value,
+            neighborhood: e.target[7].value,
+            number: e.target[8].value,
+            complement: e.target[9].value,
+            city: e.target[10].value,
+            state: e.target[11].value,
             user: {
-                email_cellphone: email,
-                password: password
+                email_cellphone: e.target[12].value,
+                password: e.target[13].value
             }
         }
         console.log(patient)
-        const response = await Api.post('patients', patient)
+        const response = await Api.post('people', patient)
         if(response.data){
             return alert('sucesso')
         }
         alert('error')
     }
 
-    async function findAddress(){
-        if(zipcode.length >= 8){
+    async function findAddress(event: FocusEvent<HTMLInputElement, Element>){
+        if(event.target.value.length >= 8){
           const response = await Cep.get(`${zipcode}/json/`)
           setZipcode(response.data.cep)
           setAddress(response.data.logradouro)
@@ -74,22 +73,36 @@ const CreatePatient: React.FC = () => {
 
                     <Input 
                         type="text"
+                        name='name'
                         placeholder="Nome"
                         required
-                        onChange={ (e) => setName(e.target.value) }
                     />
                     <Input 
                         type="text"
+                        name='cpf'
                         placeholder="CPF"
                         required
-                        onChange={ (e) => setCpf(parseInt(e.target.value)) }
                     />
 
                     <Input 
                         type="date"
+                        name='dateofbirth'
                         placeholder="Data de Nacimento"
                         required
-                        onChange={ (e) => setDateOfBirth(e.target.value) }
+                    />
+
+                    <Input 
+                        type="text"
+                        name='number_sus'
+                        placeholder="Número do sus"
+                        required
+                    />
+
+                    <Input 
+                        type="text"
+                        name='number_post'
+                        placeholder="Número do Posto"
+                        required
                     />
 
                     <Input
@@ -97,7 +110,7 @@ const CreatePatient: React.FC = () => {
                         placeholder="CEP"
                         required
                         value={zipcode}
-                        onBlur={() => findAddress()}
+                        onBlur={findAddress}
                         onChange={ (e) => setZipcode(e.target.value) }
                     />
 
@@ -122,29 +135,40 @@ const CreatePatient: React.FC = () => {
                         placeholder="Número"
                         required
                         value={number}
-                        onChange={ (e) => setNumber(parseInt(e.target.value)) }
+                        onChange={ (e) => setNumber(e.target.value) }
                     />
 
                     <Input
                         type="text"
                         placeholder="Complemento"
-                        required
                         value={complment}
                         onChange={ (e) => setComplment(e.target.value) }
                     />
 
                     <Input
                         type="text"
-                        placeholder="E-mail"
+                        placeholder="Cidade"
+                        name='city'
+                    />
+
+                    <Input
+                        type="text"
+                        placeholder="Estado"
+                        name='state'
+                    />
+
+                    <Input
+                        type="text"
+                        placeholder="E-mail ou Celular"
+                        name='email_cellphone'
                         required
-                        onChange={ (e) => setEmail(e.target.value) }
                     />
 
                     <Input
                         type="password"
+                        name='password'
                         placeholder="Senha de acesso"
                         required
-                        onChange={ (e) => setPassword(e.target.value) }
                     />
 
                     <Button type="submit">Cadastrar</Button>
