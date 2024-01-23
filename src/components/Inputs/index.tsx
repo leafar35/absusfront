@@ -1,11 +1,19 @@
-import React, { InputHTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 
-import { Container }  from './styles'
+export interface InputProps extends HTMLAttributes<HTMLInputElement>{
+    icon?: string
+    label?: string
+    type?: string
+    name?: string
+    value?: string
+}
 
-type IInputProps = InputHTMLAttributes<HTMLInputElement>;
-
-const Input: React.FC<IInputProps> = ({ ...rest }) => (
-    <Container {...rest} />
-);
-
-export default Input;
+export function Input({icon, label, ...rest}: InputProps){
+    return (
+        <div className="input-field col s12">
+            <i className="material-icons prefix pt-2">{icon}</i>
+            <input {...rest} />
+            <label htmlFor={label} className="center-align">{label}</label>
+        </div>
+    )
+}

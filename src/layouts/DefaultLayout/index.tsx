@@ -2,16 +2,16 @@ import Aside from '../../components/Aside';
 import MainHeader from '../../components/MainHeader';
 import Content from '../../components/Content';
 import { Outlet } from 'react-router-dom';
-import { Grid } from './styled';
+import { Main } from './styled';
 
 export function DefaultLayout(){
     return (
-        <Grid>
+        <Main>
             <MainHeader />
             <Aside />
             <Content> 
                 <Outlet />
             </Content>
-        </Grid>
+        </Main>
     )
 }

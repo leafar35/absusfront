@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Api from '../../../services/api';
-import Input from '../../../components/Inputs';
-import Button from '../../../components/Buttom';
+import { Input } from '../../../components/Inputs';
+import { Button } from '../../../components/Buttom';
 import { MdAccessTime } from "react-icons/md";
 import SelectInput from '../../../components/SelectInput';
 import { Container, Content, Form, Title, FormTitle } from '../styles';
@@ -63,7 +63,7 @@ const CreateSchedule: React.FC = () => {
                         Cadastrar
                     </FormTitle>
 
-                    <Input 
+                    {/* <Input 
                         type="text"
                         placeholder="Titulo"
                         required
@@ -88,15 +88,15 @@ const CreateSchedule: React.FC = () => {
                         placeholder="Dia da Consulta"
                         required
                         onChange={ (e) => setSchedule(e.target.value) }
-                    />
+                    /> */}
 
                     <SelectInput
                         options={options}
                         change={(e) => setUserId(parseInt(e.target.value))}
                     />
 
-                    <Button type="submit">Cadastrar</Button>
-                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button>
+                    {/* <Button type="submit">Cadastrar</Button>
+                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button> */}
                 </Form>
             </Content>
 

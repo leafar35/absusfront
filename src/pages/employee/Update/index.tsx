@@ -1,8 +1,8 @@
 import Api from '../../../services/api';
 import Cep from '../../../services/cep';
 import { MdPerson } from "react-icons/md";
-import Input from '../../../components/Inputs';
-import Button from '../../../components/Buttom';
+import { Input } from '../../../components/Inputs';
+import { Button } from '../../../components/Buttom';
 import React, { useEffect, useState } from 'react';
 import { IEmployee } from '../../../shared/iemployee';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -101,7 +101,7 @@ export default function UpdateEmployee() {
                         Cadastrar
                     </FormTitle>
 
-                    <Input 
+                    {/* <Input 
                         type="text"
                         placeholder="Nome"
                         required
@@ -195,10 +195,10 @@ export default function UpdateEmployee() {
                         required
                         value={password}
                         onChange={ (e) => setPassword(e.target.value) }
-                    />
+                    /> */}
 
-                    <Button type="submit">Atualizar</Button>
-                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button>
+                    {/* <Button type="submit">Atualizar</Button>
+                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button> */}
                 </Form>
             </Content>
 

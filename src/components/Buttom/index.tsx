@@ -1,13 +1,21 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 
-import { Container }  from './styles'
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+    children: ReactNode
+    required: string
+}
 
-type IButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
-
-const Button: React.FC<IButtonProps> = ({children, ...rest }) => (
-    <Container {...rest}>
-        {children}
-    </Container>
-);
-
-export default Button;
+export function Button({
+    children,
+    required,
+    ...rest
+}: ButtonProps){
+    return (
+        <button
+            {...rest}
+            type='submit'
+        >
+            {children as string}
+        </button>
+    )
+}

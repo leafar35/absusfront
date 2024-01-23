@@ -1,8 +1,8 @@
 import { FocusEvent, useState } from 'react';
 import Api from '../../../services/api';
 import Cep from '../../../services/cep';
-import Input from '../../../components/Inputs';
-import Button from '../../../components/Buttom';
+import { Input } from '../../../components/Inputs';
+import { Button } from '../../../components/Buttom';
 import { MdPerson } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { Container, Content, Form, Title, FormTitle } from '../styles';
@@ -66,7 +66,7 @@ export default function CreateEmployee(){
                         Cadastrar
                     </FormTitle>
 
-                    <Input 
+                    {/* <Input 
                         type="text"
                         name='name'
                         placeholder="Nome"
@@ -150,10 +150,10 @@ export default function CreateEmployee(){
                         placeholder="Senha de acesso"
                         required
                         name='password'
-                    />
+                    /> */}
 
-                    <Button type="submit">Cadastrar</Button>
-                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button>
+                    {/* <Button type="submit">Cadastrar</Button>
+                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button> */}
                 </Form>
             </Content>
 

@@ -1,8 +1,8 @@
 import React, { FocusEvent, useState } from 'react';
 import Api from '../../../services/api';
 import Cep from '../../../services/cep';
-import Input from '../../../components/Inputs';
-import Button from '../../../components/Buttom';
+import { Input } from '../../../components/Inputs';
+import { Button } from '../../../components/Buttom';
 import { MdPerson } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { IPatient } from '../../../shared/ipatient';
@@ -71,7 +71,7 @@ const CreatePatient: React.FC = () => {
                         Cadastrar
                     </FormTitle>
 
-                    <Input 
+                    {/* <Input 
                         type="text"
                         name='name'
                         placeholder="Nome"
@@ -169,10 +169,10 @@ const CreatePatient: React.FC = () => {
                         name='password'
                         placeholder="Senha de acesso"
                         required
-                    />
+                    /> */}
 
-                    <Button type="submit">Cadastrar</Button>
-                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button>
+                    {/* <Button type="submit">Cadastrar</Button>
+                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button> */}
                 </Form>
             </Content>
 

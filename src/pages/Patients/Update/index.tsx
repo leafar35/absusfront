@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Api from '../../../services/api';
 import Cep from '../../../services/cep';
-import Input from '../../../components/Inputs';
-import Button from '../../../components/Buttom';
+import { Input } from '../../../components/Inputs';
+import { Button } from '../../../components/Buttom';
 import { MdPerson } from "react-icons/md";
 import { useNavigate, useParams } from 'react-router-dom';
 import { IPatient } from '../../../shared/ipatient';
@@ -108,7 +108,7 @@ const CreatePatient: React.FC = () => {
                         Atualizar Paciente
                     </FormTitle>
 
-                    <Input 
+                    {/* <Input 
                         type="text"
                         placeholder="Nome"
                         required
@@ -215,10 +215,10 @@ const CreatePatient: React.FC = () => {
                         required
                         value={password}
                         onChange={ (e) => setPassword(e.target.value) }
-                    />
+                    /> */}
 
-                    <Button type="submit">Atualizar</Button>
-                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button>
+                    {/* <Button type="submit">Atualizar</Button>
+                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button> */}
                 </Form>
             </Content>
 

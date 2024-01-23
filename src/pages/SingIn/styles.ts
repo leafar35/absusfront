@@ -1,45 +1,23 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Loginpage = styled.div`
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+
     height: 100vh;
-    
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: ${props => props.theme.colors.primary};
-`;
 
-export const Logo = styled.div`
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-    > h2 {
-        color: ${props => props.theme.colors.white}; 
-        margin-left: 7px;
-    }
-    > img {
-        width: 40px;
-        height: 40px;
-    }
-`;
-
-export const Form = styled.form`
-    width: 300px;
-    height: 300px;
-    padding: 30px;
-    border-radius: 10px;
-    background-color: ${props => props.theme.colors.tertiary};
-`;
-
-export const FormTitle = styled.h1`
-    margin-bottom: 40px;
-    color: ${props => props.theme.colors.white}; 
-    &:after {
-        content: '';
-        display: block;
-        width: 55px;
-        border-bottom: 10px solid ${props => props.theme.colors.warning};  
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+            align-items: center;
+    .card-panel.border-radius-6.login-card
+    {
+        margin-left: 0 !important;
     }
 `;
