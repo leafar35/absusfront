@@ -1,4 +1,6 @@
 import 'materialize-css/dist/css/materialize.min.css';
+// import './css/style-horizontal.css' atrapalha o vertical
+import './css/vertical-modern-menu-style.css'
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
@@ -39,5 +41,8 @@ export default createGlobalStyle`
         background: #8e24aa;
         background: -webkit-linear-gradient(45deg, #8e24aa, #ff6e40) !important;
         background: linear-gradient(45deg, #8e24aa, #ff6e40) !important;
+    }
+    .bg-opacity-8 {
+        background-color: rgba(255, 255, 255, .8);
     }
 `;

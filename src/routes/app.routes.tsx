@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 //import Layout from '../components/Layout';
-import Dashboard from '../pages/Dashboard';
+import { Dashboard } from '../pages/Dashboard';
 import CreatePatient from '../pages/Patients/Create';
 import UpdatePatient from '../pages/Patients/Update';
 import List from '../pages/Schedules';

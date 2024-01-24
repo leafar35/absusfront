@@ -1,15 +1,23 @@
 import React from 'react';
-import { Container } from './styles';
+import { Container, Main } from './styles';
 type Props = {
     children?: React.ReactNode
 };
 
-const Content: React.FC<Props> = ({ children }) => {
+export function Content({ children }: Props){
     return (
-        <Container>
-            {children}
-        </Container>
+        <Main id='main'>
+            <div className='row'>
+                <div className="content-wrapper-before gradient-45deg-indigo-purple"></div>
+                <div className="col s12">
+                    <Container className='container'>
+                        <div className='section'>
+                            {children}
+                        </div>
+                    </Container>
+                    <div className="content-overlay"></div>
+                </div>
+            </div>
+        </Main>
     );
 }
-
-export default Content;
