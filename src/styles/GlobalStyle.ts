@@ -1,5 +1,4 @@
 import 'materialize-css/dist/css/materialize.min.css';
-// import './css/style-horizontal.css' atrapalha o vertical
 import './css/vertical-modern-menu-style.css'
 import { createGlobalStyle } from 'styled-components';
 
