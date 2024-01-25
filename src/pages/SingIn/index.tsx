@@ -37,10 +37,14 @@ export function SingIn() {
                                     </div>
                                 </div>
                                 <div className="row margin">
-                                    <Input label='E-mail' icon="person_outline" name="email_cellphone" type="text" />
+                                    <div className="input-field col s12">
+                                        <Input label='E-mail' icon="person_outline" name="email_cellphone" type="text" />
+                                    </div>
                                 </div>
                                 <div className="row margin">
-                                    <Input label='Senha' icon="lock_outline" name="password" type="password" />
+                                    <div className="input-field col s12">
+                                        <Input label='Senha' icon="lock_outline" name="password" type="password" />
+                                    </div>
                                 </div>
                                 <div className="row">
                                     <div className="col s12 m12 l12 ml-2 mt-1">
@@ -54,10 +58,7 @@ export function SingIn() {
                                 </div>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <Button
-                                            className='btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12'
-                                            required='required'
-                                        >
+                                        <Button className='btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12'>
                                             Entrar
                                         </Button>
                                     </div>

@@ -3,16 +3,14 @@ import Api from '../../../services/api';
 import Cep from '../../../services/cep';
 import { Input } from '../../../components/Inputs';
 import { Button } from '../../../components/Buttom';
-import { MdPerson } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { IPatient } from '../../../shared/ipatient';
-import { Container, Content, Form, Title, FormTitle } from '../styles';
 
 const CreatePatient: React.FC = () => {
     const navigate = useNavigate();
     const [zipcode, setZipcode] = useState<string>('')
     const [address, setAddress] = useState<string>('')
-    const [number, setNumber] = useState<string>('0')
+    const [number, setNumber] = useState<string>('s/n')
     const [complment, setComplment] = useState<string>('')
     const [neighborhood, setNeighborhood] = useState<string>('')
 
@@ -37,7 +35,6 @@ const CreatePatient: React.FC = () => {
                 password: e.target[13].value
             }
         }
-        console.log(patient)
         const response = await Api.post('people', patient)
         if(response.data){
             return alert('sucesso')
@@ -60,123 +57,100 @@ const CreatePatient: React.FC = () => {
     }
 
     return (
-        <Container>
-            <Title>
-                <MdPerson />
-                Pacients
-            </Title>
-            <Content>
-                <Form onSubmit={handleCreate}>
-                    <FormTitle>
-                        Cadastrar
-                    </FormTitle>
-
-                    {/* <Input 
-                        type="text"
-                        name='name'
-                        placeholder="Nome"
-                        required
-                    />
-                    <Input 
-                        type="text"
-                        name='cpf'
-                        placeholder="CPF"
-                        required
-                    />
-
-                    <Input 
-                        type="date"
-                        name='dateofbirth'
-                        placeholder="Data de Nacimento"
-                        required
-                    />
-
-                    <Input 
-                        type="text"
-                        name='number_sus'
-                        placeholder="Número do sus"
-                        required
-                    />
-
-                    <Input 
-                        type="text"
-                        name='number_post'
-                        placeholder="Número do Posto"
-                        required
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="CEP"
-                        required
-                        value={zipcode}
-                        onBlur={findAddress}
-                        onChange={ (e) => setZipcode(e.target.value) }
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Endereço"
-                        required
-                        value={address}
-                        onChange={ (e) => setAddress(e.target.value) }
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Bairro"
-                        required
-                        value={neighborhood}
-                        onChange={ (e) => setNeighborhood(e.target.value) }
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Número"
-                        required
-                        value={number}
-                        onChange={ (e) => setNumber(e.target.value) }
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Complemento"
-                        value={complment}
-                        onChange={ (e) => setComplment(e.target.value) }
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Cidade"
-                        name='city'
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Estado"
-                        name='state'
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="E-mail ou Celular"
-                        name='email_cellphone'
-                        required
-                    />
-
-                    <Input
-                        type="password"
-                        name='password'
-                        placeholder="Senha de acesso"
-                        required
-                    /> */}
-
-                    {/* <Button type="submit">Cadastrar</Button>
-                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button> */}
-                </Form>
-            </Content>
-
-        </Container>
+        <>
+            <div className="section">
+                <div className="card">
+                    <div className="card-content">
+                    <p className="caption mb-0">Tables are a nice way to organize a lot of data. We provide a few utility classes to help
+                        you style your table as easily as possible. In addition, to improve mobile experience, all tables on
+                        mobile-screen widths are centered automatically.</p>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12">
+                        <div className="card card-default scrollspy">
+                            <form>
+                                <div className="card-content">
+                                    <div className="card-title">
+                                        <div className="row">
+                                            <div className="col s12 m6 l10">
+                                                <h4 className="card-title">Informações Grais</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col s12">
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Nome' type='text' name='name' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='CPF' type='text' name='cpf' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Data de nascimento' type='text' name='dateofbirth' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='CEP' type='text' name='zipcode' onBlur={findAddress} />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Endereço' type='text' name='address' value={address} />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s11">
+                                                    <Input label='Bairro' type='text' name='neighborhood' value={neighborhood} />
+                                                </div>
+                                                <div className="input-field col s1">
+                                                    <Input label='Número' type='text' name='numero' value={number} />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Complemento' type='text' name='complement' value={complment} />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s11">
+                                                    <Input label='Cidade' type='text' name='city' />
+                                                </div>
+                                                <div className="input-field col s1">
+                                                    <Input label='Estado' type='text' name='state' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s6">
+                                                    <Input label='celular' type='text' name='email_cellphone' />
+                                                </div>
+                                                <div className="input-field col s6">
+                                                    <Input label='password' type='password' name='password' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <Button className='btn waves-effect waves-light col s1 red'>
+                                                    Voltar
+                                                </Button>
+                                                <Button className='btn waves-effect waves-light col s1 right'>
+                                                    Cadastrar
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 }
 

@@ -1,12 +1,10 @@
 import Api from '../../../services/api';
 import Cep from '../../../services/cep';
-import { MdPerson } from "react-icons/md";
 import { Input } from '../../../components/Inputs';
 import { Button } from '../../../components/Buttom';
 import React, { useEffect, useState } from 'react';
 import { IEmployee } from '../../../shared/iemployee';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Container, Content, Form, Title, FormTitle } from '../styles';
 
 export default function UpdateEmployee() {
     const navigate = useNavigate();
@@ -90,118 +88,112 @@ export default function UpdateEmployee() {
     }
 
     return (
-        <Container>
-            <Title>
-                <MdPerson />
-                Funcionários
-            </Title>
-            <Content>
-                <Form onSubmit={handleCreate}>
-                    <FormTitle>
-                        Cadastrar
-                    </FormTitle>
-
-                    {/* <Input 
-                        type="text"
-                        placeholder="Nome"
-                        required
-                        value={name}
-                        onChange={ (e) => setName(e.target.value) }
-                    />
-                    <Input 
-                        type="text"
-                        placeholder="CPF"
-                        required
-                        value={cpf}
-                        onChange={ (e) => setCpf(parseInt(e.target.value)) }
-                    />
-
-                    <Input 
-                        type="date"
-                        placeholder="Data de Nacimento"
-                        required
-                        value={dateofbirth}
-                        onChange={ (e) => setDateOfBirth(e.target.value) }
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="CEP"
-                        required
-                        value={zipcode}
-                        onBlur={() => findAddress()}
-                        onChange={ (e) => setZipcode(e.target.value) }
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Endereço"
-                        required
-                        value={address}
-                        onChange={ (e) => setAddress(e.target.value) }
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Bairro"
-                        required
-                        value={neighborhood}
-                        onChange={ (e) => setNeighborhood(e.target.value) }
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Número"
-                        required
-                        value={number}
-                        onChange={ (e) => setNumber(parseInt(e.target.value)) }
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Complemento"
-                        required
-                        value={complment}
-                        onChange={ (e) => setComplment(e.target.value) }
-                    />
-
-                    <Input
-                        type="text"
-                        name='city'
-                        placeholder="Cidade"
-                        required
-                        value={city}
-                    />
-
-                    <Input
-                        type="text"
-                        name='state'
-                        placeholder="Estado"
-                        required
-                        value={state}
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="E-mail"
-                        required
-                        value={email}
-                        onChange={ (e) => setEmail(e.target.value) }
-                    />
-
-                    <Input
-                        type="password"
-                        placeholder="Senha de acesso"
-                        required
-                        value={password}
-                        onChange={ (e) => setPassword(e.target.value) }
-                    /> */}
-
-                    {/* <Button type="submit">Atualizar</Button>
-                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button> */}
-                </Form>
-            </Content>
-
-        </Container>
+        <>
+            <div className="section">
+                <div className="card">
+                    <div className="card-content">
+                    <p className="caption mb-0">Tables are a nice way to organize a lot of data. We provide a few utility classes to help
+                        you style your table as easily as possible. In addition, to improve mobile experience, all tables on
+                        mobile-screen widths are centered automatically.</p>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12">
+                        <div className="card card-default scrollspy">
+                            <form>
+                                <div className="card-content">
+                                    <div className="card-title">
+                                        <div className="row">
+                                            <div className="col s12 m6 l10">
+                                                <h4 className="card-title">Informações Grais</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col s12">
+                                            <div className="row">
+                                                <div className="input-field col s12">
+                                                    <select name='perfil'>
+                                                        <option value="1">Administrador</option>
+                                                        <option value="2">Recepicionista</option>
+                                                        <option value="3">Agentes de Saúde</option>
+                                                        <option value="4">Médicos</option>
+                                                        <option value="5">Dentistas</option>
+                                                        <option value="6">Enfermeiros</option>
+                                                    </select>
+                                                    <label>Selecione o perfil do usuário</label>
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Nome' type='text' name='name' value={name} />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='CPF' type='text' name='cpf' value={cpf.toString()} />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Data de nascimento' type='text' name='dateofbirth' value={dateofbirth} />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='CEP' type='text' name='zipcode' value={zipcode} />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Endereço' type='text' name='address' value={address} />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s11">
+                                                    <Input label='Bairro' type='text' name='neighborhood' value={neighborhood} />
+                                                </div>
+                                                <div className="input-field col s1">
+                                                    <Input label='Número' type='text' name='numero' value={number.toString()} />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Complemento' type='text' name='complement' value={complment} />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s11">
+                                                    <Input label='Cidade' type='text' name='city' value={city} />
+                                                </div>
+                                                <div className="input-field col s1">
+                                                    <Input label='Estado' type='text' name='state' value={state} />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s6">
+                                                    <Input label='e-mail' type='text' name='email' value={email} />
+                                                </div>
+                                                <div className="input-field col s6">
+                                                    <Input label='password' type='password' name='password' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <Button className='btn waves-effect waves-light col s1 red'>
+                                                    Voltar
+                                                </Button>
+                                                <Button className='btn waves-effect waves-light col s1 right'>
+                                                    Cadastrar
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 }

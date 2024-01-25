@@ -10,6 +10,8 @@ function App() {
   const { theme } = useTheme();
   useEffect(() => {
     M.updateTextFields();
+    const elems = document.querySelectorAll('select');
+    M.FormSelect.init(elems);
   },[])
   
   return (

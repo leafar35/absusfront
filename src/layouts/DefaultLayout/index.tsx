@@ -4,6 +4,7 @@ import { Content } from '../../components/Content';
 import { Outlet } from 'react-router-dom';
 import { Main } from './styled';
 import { useEffect } from 'react';
+import { Footer } from '../../components/Footer';
 
 export function DefaultLayout(){
     useEffect(() => {
@@ -18,6 +19,7 @@ export function DefaultLayout(){
             <Content> 
                 <Outlet />
             </Content>
+            <Footer />
         </Main>
     )
 }

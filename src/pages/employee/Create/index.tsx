@@ -5,7 +5,6 @@ import { Input } from '../../../components/Inputs';
 import { Button } from '../../../components/Buttom';
 import { MdPerson } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
-import { Container, Content, Form, Title, FormTitle } from '../styles';
 import { IEmployee } from '../../../shared/iemployee';
 
 export default function CreateEmployee(){
@@ -55,108 +54,112 @@ export default function CreateEmployee(){
     }
 
     return (
-        <Container>
-            <Title>
-                <MdPerson />
-                Funcionários
-            </Title>
-            <Content>
-                <Form onSubmit={handleCreate}>
-                    <FormTitle>
-                        Cadastrar
-                    </FormTitle>
-
-                    {/* <Input 
-                        type="text"
-                        name='name'
-                        placeholder="Nome"
-                        required
-                    />
-                    <Input 
-                        type="text"
-                        name='cpf'
-                        placeholder="CPF"
-                        required
-                    />
-
-                    <Input 
-                        type="date"
-                        name='dateofbirth'
-                        placeholder="Data de Nacimento"
-                        required
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="CEP"
-                        required
-                        name='zipcode'
-                        onBlur={findAddress}
-                    />
-
-                    <Input
-                        type="text"
-                        name='address'
-                        placeholder="Endereço"
-                        required
-                        value={address}
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Bairro"
-                        required
-                        name='neighborhood'
-                        value={neighborhood}
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="Número"
-                        required
-                        name='number'
-                        value={number}
-                    />
-
-                    <Input
-                        type="text"
-                        name='complement'
-                        placeholder="Complemento"
-                    />
-
-                    <Input
-                        type="text"
-                        name='city'
-                        placeholder="Cidade"
-                        required
-                    />
-
-                    <Input
-                        type="text"
-                        name='state'
-                        placeholder="Estado"
-                        required
-                    />
-
-                    <Input
-                        type="text"
-                        placeholder="E-mail"
-                        required
-                        name='email'
-                    />
-
-                    <Input
-                        type="password"
-                        placeholder="Senha de acesso"
-                        required
-                        name='password'
-                    /> */}
-
-                    {/* <Button type="submit">Cadastrar</Button>
-                    <Button type="button" onClick={() => handleGoBack()}>Voltar</Button> */}
-                </Form>
-            </Content>
-
-        </Container>
+        <>
+            <div className="section">
+                <div className="card">
+                    <div className="card-content">
+                    <p className="caption mb-0">Tables are a nice way to organize a lot of data. We provide a few utility classes to help
+                        you style your table as easily as possible. In addition, to improve mobile experience, all tables on
+                        mobile-screen widths are centered automatically.</p>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col s12">
+                        <div className="card card-default scrollspy">
+                            <form>
+                                <div className="card-content">
+                                    <div className="card-title">
+                                        <div className="row">
+                                            <div className="col s12 m6 l10">
+                                                <h4 className="card-title">Informações Grais</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col s12">
+                                            <div className="row">
+                                                <div className="input-field col s12">
+                                                    <select name='perfil'>
+                                                        <option value="1">Administrador</option>
+                                                        <option value="2">Recepicionista</option>
+                                                        <option value="3">Agentes de Saúde</option>
+                                                        <option value="4">Médicos</option>
+                                                        <option value="5">Dentistas</option>
+                                                        <option value="6">Enfermeiros</option>
+                                                    </select>
+                                                    <label>Selecione o perfil do usuário</label>
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Nome' type='text' name='name' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='CPF' type='text' name='cpf' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Data de nascimento' type='text' name='dateofbirth' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='CEP' type='text' name='zipcode' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Endereço' type='text' name='address' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s11">
+                                                    <Input label='Bairro' type='text' name='neighborhood' />
+                                                </div>
+                                                <div className="input-field col s1">
+                                                    <Input label='Número' type='text' name='numero' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Complemento' type='text' name='complement' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s11">
+                                                    <Input label='Cidade' type='text' name='city' />
+                                                </div>
+                                                <div className="input-field col s1">
+                                                    <Input label='Estado' type='text' name='state' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s6">
+                                                    <Input label='e-mail' type='text' name='email' />
+                                                </div>
+                                                <div className="input-field col s6">
+                                                    <Input label='password' type='password' name='password' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <Button className='btn waves-effect waves-light col s1 red'>
+                                                    Voltar
+                                                </Button>
+                                                <Button className='btn waves-effect waves-light col s1 right'>
+                                                    Cadastrar
+                                                </Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 }

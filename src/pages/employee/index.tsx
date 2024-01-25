@@ -1,13 +1,10 @@
 import Api from '../../services/api';
 import { useState, useEffect } from 'react';
-import Patient from '../../components/Patient';
-import { IEmployee } from '../../shared/iemployee';
-import { MdPerson, MdOutlineAddCircle } from "react-icons/md";
-import { Container, Title, Actions, Content } from './styles';
-import { Link } from 'react-router-dom';
+import { Grid } from '../../components/Grid';
+import { IPeople } from '../../shared/IPeople';
 
 export default function Employee(){
-    const [data, setData] = useState<IEmployee[]>([]);
+    const [data, setData] = useState<IPeople[]>([]);
 
     useEffect(() => {
         async function getEmployee() {
@@ -18,30 +15,17 @@ export default function Employee(){
     },[])
 
     return (
-        <Container>
-            <Title>
-                <MdPerson />
-                Funcionários
-            </Title>
-            <Actions>
-                <Link to='/employees/create'>
-                    <MdOutlineAddCircle />
-                    Cadastrar
-                </Link>
-            </Actions>
-            <Content>
-                {
-                    data.map(item => (
-                        <Patient
-                            key={item.id}
-                            id={item.id ?? 0}
-                            name={item.name}
-                            dateofbirth={item.dateofbirth}
-                            user={item.user}
-                        />
-                    ))
-                }
-            </Content>
-        </Container>
+        <>
+            <div className="section">
+                <div className="card">
+                    <div className="card-content">
+                    <p className="caption mb-0">Tables are a nice way to organize a lot of data. We provide a few utility classes to help
+                        you style your table as easily as possible. In addition, to improve mobile experience, all tables on
+                        mobile-screen widths are centered automatically.</p>
+                    </div>
+                </div>
+                <Grid data={data} />
+            </div>
+        </>
     );
 }

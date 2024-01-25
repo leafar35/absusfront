@@ -10,10 +10,10 @@ export interface InputProps extends HTMLAttributes<HTMLInputElement>{
 
 export function Input({icon, label, ...rest}: InputProps){
     return (
-        <div className="input-field col s12">
-            <i className="material-icons prefix pt-2">{icon}</i>
+        <>
+            {icon && (<i className="material-icons prefix pt-2">{icon}</i>)}
             <input {...rest} />
             <label htmlFor={label} className="center-align">{label}</label>
-        </div>
+        </>
     )
 }

@@ -3,7 +3,6 @@ import Api from '../../../services/api';
 import { Input } from '../../../components/Inputs';
 import { Button } from '../../../components/Buttom';
 import { MdAccessTime } from "react-icons/md";
-import SelectInput from '../../../components/SelectInput';
 import { Container, Content, Form, Title, FormTitle } from '../styles';
 import { IUserEntity } from '../../../shared/iuser';
 import { ISchedule } from '../../../shared/ischedule';
@@ -90,10 +89,6 @@ const CreateSchedule: React.FC = () => {
                         onChange={ (e) => setSchedule(e.target.value) }
                     /> */}
 
-                    <SelectInput
-                        options={options}
-                        change={(e) => setUserId(parseInt(e.target.value))}
-                    />
 
                     {/* <Button type="submit">Cadastrar</Button>
                     <Button type="button" onClick={() => handleGoBack()}>Voltar</Button> */}
