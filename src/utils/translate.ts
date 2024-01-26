@@ -10,6 +10,12 @@ const Translate = (value: string): string => {
         case 'patients':
             title = 'Paciente'
             break
+        case 'schedules':
+            title = 'Agendamentos'
+            break
+        case 'calendary':
+            title = 'Calendário'
+            break
         case 'create':
             title = 'Cadastrar'
             break
