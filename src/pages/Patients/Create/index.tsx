@@ -48,6 +48,7 @@ const CreatePatient: React.FC = () => {
           setZipcode(response.data.cep)
           setAddress(response.data.logradouro)
           setNeighborhood(response.data.bairro)
+          setNumber(response.data.numero)
           setComplment(response.data.complemento)
         }
       }
@@ -69,7 +70,7 @@ const CreatePatient: React.FC = () => {
                 <div className="row">
                     <div className="col s12">
                         <div className="card card-default scrollspy">
-                            <form>
+                            <form onSubmit={handleCreate}>
                                 <div className="card-content">
                                     <div className="card-title">
                                         <div className="row">

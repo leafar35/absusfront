@@ -101,7 +101,7 @@ export function Aside(){
           </Link>
         </li>
         <li className="bold">
-          <Link to="/employees" className="waves-effect waves-cyan">
+          <Link to="/users" className="waves-effect waves-cyan">
             <i className="material-icons">face</i><span className="menu-title" data-i18n="User">Usuários</span>
           </Link>
         </li>

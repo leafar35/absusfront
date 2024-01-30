@@ -25,6 +25,8 @@ export default function UpdateEmployee() {
     const [password, setPassword] = useState<string>('')
 
     useEffect(() => {
+        const elems = document.querySelectorAll('select');
+        M.FormSelect.init(elems);
         async function getPatientForUpdate() {
             const response = await Api.get(`employee/${patientId.id}`)
             setId(response.data.id)
@@ -45,7 +47,7 @@ export default function UpdateEmployee() {
         getPatientForUpdate()
     },[patientId.id])
 
-    async function handleCreate(event: React.FormEvent<HTMLFormElement>) {
+    async function handleUpdate(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         let employee: IEmployee
         employee = {
@@ -100,7 +102,7 @@ export default function UpdateEmployee() {
                 <div className="row">
                     <div className="col s12">
                         <div className="card card-default scrollspy">
-                            <form>
+                            <form onSubmit={handleUpdate}>
                                 <div className="card-content">
                                     <div className="card-title">
                                         <div className="row">
@@ -141,7 +143,7 @@ export default function UpdateEmployee() {
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='CEP' type='text' name='zipcode' value={zipcode} />
+                                                    <Input label='CEP' type='text' name='zipcode' onBlur={findAddress} value={zipcode} />
                                                 </div>
                                             </div>
                                             <div className='row'>

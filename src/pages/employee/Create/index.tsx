@@ -1,17 +1,21 @@
-import { FocusEvent, useState } from 'react';
+import { FocusEvent, useEffect, useState } from 'react';
 import Api from '../../../services/api';
 import Cep from '../../../services/cep';
+import { useNavigate } from 'react-router-dom';
 import { Input } from '../../../components/Inputs';
 import { Button } from '../../../components/Buttom';
-import { MdPerson } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
 import { IEmployee } from '../../../shared/iemployee';
 
 export default function CreateEmployee(){
     const navigate = useNavigate();
     const [address, setAddress] = useState<string>('')
-    const [number, setNumber] = useState<string>('0')
+    const [number, setNumber] = useState<string>('S/N')
     const [neighborhood, setNeighborhood] = useState<string>('')
+
+    useEffect(() => {
+        const elems = document.querySelectorAll('select');
+        M.FormSelect.init(elems);
+    },[])
 
     async function handleCreate(e: any) {
         e.preventDefault();
@@ -66,7 +70,7 @@ export default function CreateEmployee(){
                 <div className="row">
                     <div className="col s12">
                         <div className="card card-default scrollspy">
-                            <form>
+                            <form onSubmit={handleCreate}>
                                 <div className="card-content">
                                     <div className="card-title">
                                         <div className="row">
@@ -102,25 +106,25 @@ export default function CreateEmployee(){
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='Data de nascimento' type='text' name='dateofbirth' />
+                                                    <Input label='Data de nascimento' type='date' name='dateofbirth' />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='CEP' type='text' name='zipcode' />
+                                                    <Input label='CEP' type='text' name='zipcode' onBlur={findAddress} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='Endereço' type='text' name='address' />
+                                                    <Input label='Endereço' type='text' name='address' value={address} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s11">
-                                                    <Input label='Bairro' type='text' name='neighborhood' />
+                                                    <Input label='Bairro' type='text' name='neighborhood' value={neighborhood} />
                                                 </div>
                                                 <div className="input-field col s1">
-                                                    <Input label='Número' type='text' name='numero' />
+                                                    <Input label='Número' type='text' name='numero' value={number} />
                                                 </div>
                                             </div>
                                             <div className='row'>

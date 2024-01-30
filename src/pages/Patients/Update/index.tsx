@@ -49,7 +49,7 @@ const CreatePatient: React.FC = () => {
         getPatientForUpdate()
     },[patientId.id])
 
-    async function handleCreate(event: React.FormEvent<HTMLFormElement>) {
+    async function handleUpdate(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         let patient: IPatient
         patient = {
@@ -107,7 +107,7 @@ const CreatePatient: React.FC = () => {
                 <div className="row">
                     <div className="col s12">
                         <div className="card card-default scrollspy">
-                            <form>
+                            <form onSubmit={handleUpdate}>
                                 <div className="card-content">
                                     <div className="card-title">
                                         <div className="row">
@@ -135,7 +135,7 @@ const CreatePatient: React.FC = () => {
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='CEP' type='text' name='zipcode' value={zipcode} />
+                                                    <Input label='CEP' type='text' name='zipcode' onBlur={findAddress} value={zipcode} />
                                                 </div>
                                             </div>
                                             <div className='row'>
