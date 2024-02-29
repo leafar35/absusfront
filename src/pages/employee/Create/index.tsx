@@ -5,35 +5,45 @@ import { useNavigate } from 'react-router-dom';
 import { Input } from '../../../components/Inputs';
 import { Button } from '../../../components/Buttom';
 import { IEmployee } from '../../../shared/iemployee';
+import { IProfileProps } from '../../../shared/iprofile.props';
 
 export default function CreateEmployee(){
     const navigate = useNavigate();
+    const [profile, setProfile] = useState<number>(0)
+    const [profiles, setProfiles] = useState<Array<IProfileProps> | null>(null)
     const [address, setAddress] = useState<string>('')
     const [number, setNumber] = useState<string>('S/N')
     const [neighborhood, setNeighborhood] = useState<string>('')
 
     useEffect(() => {
+        getProfiles()
+    },[])
+
+    async function getProfiles() {
+        const response = await Api.get('rules/profile')
+        setProfiles(response.data)
         const elems = document.querySelectorAll('select');
         M.FormSelect.init(elems);
-    },[])
+    }
 
     async function handleCreate(e: any) {
         e.preventDefault();
         let employee: IEmployee
         employee = {
-            name: e.target[0].value,
-            cpf: e.target[1].value,
-            dateofbirth: new Date(e.target[2].value),
-            zipcode: e.target[3].value,
-            address: e.target[4].value,
-            neighborhood: e.target[5].value,
-            number: e.target[6].value,
-            complement: e.target[7].value,
-            city: e.target[8].value,
-            state: e.target[9].value,
+            name: e.target[2].value,
+            cpf: e.target[3].value,
+            dateofbirth: new Date(e.target[4].value),
+            zipcode: e.target[5].value,
+            address: e.target[6].value,
+            neighborhood: e.target[7].value,
+            number: e.target[8].value,
+            complement: e.target[9].value,
+            city: e.target[10].value,
+            state: e.target[11].value,
             user: {
-                email_cellphone: e.target[10].value,
-                password: e.target[11].value
+                email_cellphone: e.target[12].value,
+                password: e.target[13].value,
+                profileId: profile,
             }
         }
         const response = await Api.post('employee', employee)
@@ -41,6 +51,11 @@ export default function CreateEmployee(){
             return alert('sucesso')
         }
         alert('error')
+    }
+
+    function handleChange(e: any) {
+        let {value} = e.target;
+        setProfile(value)
     }
 
     function findAddress(event: FocusEvent<HTMLInputElement, Element>){
@@ -83,13 +98,10 @@ export default function CreateEmployee(){
                                         <div className="col s12">
                                             <div className="row">
                                                 <div className="input-field col s12">
-                                                    <select name='perfil'>
-                                                        <option value="1">Administrador</option>
-                                                        <option value="2">Recepicionista</option>
-                                                        <option value="3">Agentes de Saúde</option>
-                                                        <option value="4">Médicos</option>
-                                                        <option value="5">Dentistas</option>
-                                                        <option value="6">Enfermeiros</option>
+                                                    <select name='perfil' onChange={handleChange}>
+                                                        {profiles?.map((value) => 
+                                                            <option value={value.id}>{value.profile}</option>
+                                                        )}
                                                     </select>
                                                     <label>Selecione o perfil do usuário</label>
                                                 </div>
