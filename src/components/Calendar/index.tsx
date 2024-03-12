@@ -24,7 +24,7 @@ export function Calendar({data}: IDataISchedule){
             plugins={[ dayGridPlugin ]}
             initialView="dayGridMonth"
             events={data.map((value) => {
-                return {title: value.title, date: value.schedule}
+                return {title: value.title, date: value.dateTime}
             })}
             eventClick={renderEventContent}
         />

@@ -13,6 +13,8 @@ export default function CreateEmployee(){
     const [profiles, setProfiles] = useState<Array<IProfileProps> | null>(null)
     const [address, setAddress] = useState<string>('')
     const [number, setNumber] = useState<string>('S/N')
+    const [city, setCity] = useState<string>('');
+    const [state, setState] = useState<string>('');
     const [neighborhood, setNeighborhood] = useState<string>('')
 
     useEffect(() => {
@@ -64,6 +66,8 @@ export default function CreateEmployee(){
                 setAddress(response.data.logradouro)
                 setNeighborhood(response.data.bairro)
                 setNumber(response.data.numero)
+                setCity(response.data.localidade)
+                setState(response.data.uf)
             })
         }
     }

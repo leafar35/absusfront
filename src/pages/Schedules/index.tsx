@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Actions, Container, Content, ScheduleTag, Title } from './styles';
-import Schedule from '../../components/Schedule';
 import Api from '../../services/api';
-import { MdAccessTime, MdOutlineAddCircle } from "react-icons/md";
+import React, { useState, useEffect } from 'react';
 import { ISchedule } from '../../shared/ischedule';
+import { Schedule } from '../../components/Schedule';
 
 const List: React.FC = () => {
     const [data, setData] = useState<ISchedule[]>([]);
@@ -17,34 +15,18 @@ const List: React.FC = () => {
     },[])
 
     return (
-        <Container>
-            <Title>
-                <MdAccessTime />
-                Agendamentos
-            </Title>
-            <Actions>
-                <ScheduleTag href='/schedules/create'>
-                    <MdOutlineAddCircle />
-                    Agendar
-                </ScheduleTag>
-            </Actions>
-            <Content>
-                {
-                    data.map(item => (
-                        <Schedule
-                            key={item.id}
-                            id={item.id}
-                            title={item.title}
-                            category={item.category}
-                            localization={item.localization}
-                            schedule={item.schedule}
-                            userId={item.userId}
-                        />
-                    ))
-                }
-            </Content>
-
-        </Container>
+        <>
+            <div className="section">
+                <div className="card">
+                    <div className="card-content">
+                    <p className="caption mb-0">Tables are a nice way to organize a lot of data. We provide a few utility classes to help
+                        you style your table as easily as possible. In addition, to improve mobile experience, all tables on
+                        mobile-screen widths are centered automatically.</p>
+                    </div>
+                </div>
+                <Schedule data={data} />
+            </div>
+        </>
     );
 }
 

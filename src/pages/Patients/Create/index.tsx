@@ -12,6 +12,8 @@ const CreatePatient: React.FC = () => {
     const [address, setAddress] = useState<string>('')
     const [number, setNumber] = useState<string>('s/n')
     const [complment, setComplment] = useState<string>('')
+    const [city, setCity] = useState<string>('');
+    const [state, setState] = useState<string>('');
     const [neighborhood, setNeighborhood] = useState<string>('')
 
     async function handleCreate(e: any) {
@@ -44,14 +46,16 @@ const CreatePatient: React.FC = () => {
 
     async function findAddress(event: FocusEvent<HTMLInputElement, Element>){
         if(event.target.value.length >= 8){
-          const response = await Cep.get(`${zipcode}/json/`)
-          setZipcode(response.data.cep)
-          setAddress(response.data.logradouro)
-          setNeighborhood(response.data.bairro)
-          setNumber(response.data.numero)
-          setComplment(response.data.complemento)
+            Cep.get(`${event.target.value}/json/`).then((response: any) => {
+                console.log(response)
+                setAddress(response.data.logradouro)
+                setNeighborhood(response.data.bairro)
+                setNumber(response.data.numero)
+                setCity(response.data.localidade)
+                setState(response.data.uf)
+            })
         }
-      }
+    }
 
     function handleGoBack(){        
         navigate(-1)
@@ -93,7 +97,17 @@ const CreatePatient: React.FC = () => {
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='Data de nascimento' type='text' name='dateofbirth' />
+                                                    <Input label='Data de nascimento' type='date' name='dateofbirth' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Número do Sus' type='text' name='number_sus' />
+                                                </div>
+                                            </div>
+                                            <div className='row'>
+                                                <div className="input-field col s12">
+                                                    <Input label='Número do posto' type='text' name='number_post' />
                                                 </div>
                                             </div>
                                             <div className='row'>
@@ -121,10 +135,10 @@ const CreatePatient: React.FC = () => {
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s11">
-                                                    <Input label='Cidade' type='text' name='city' />
+                                                    <Input label='Cidade' type='text' name='city' value={city} />
                                                 </div>
                                                 <div className="input-field col s1">
-                                                    <Input label='Estado' type='text' name='state' />
+                                                    <Input label='Estado' type='text' name='state' value={state} />
                                                 </div>
                                             </div>
                                             <div className='row'>

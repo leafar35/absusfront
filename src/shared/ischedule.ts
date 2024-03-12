@@ -1,8 +1,9 @@
 export interface ISchedule {
     id?: number
     title: string
-    category: string
+    description: string
+    dateTime: Date
     localization: string
-    schedule: Date
-    userId: number
+    google_maps_link: string
+    peopleId: number
 }
