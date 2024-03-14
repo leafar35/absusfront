@@ -1,10 +1,12 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from "react-router-dom";
 import { ISchedule } from "../../shared/ischedule";
 interface IData{
     data: Array<ISchedule>
+    onclick: (id: number | undefined) => Promise<void>
 }
 
-export function Schedule({data}: IData){
+export function Schedule({data, onclick}: IData){
     return (
         <div className="row">
             <div className="col s12">
@@ -40,9 +42,9 @@ export function Schedule({data}: IData){
                                                             <Link to={'update/'+value.id}>
                                                                 <i className="material-icons">edit</i>
                                                             </Link>
-                                                            <Link to={'delete/'+value.id}>
+                                                            <a onClick={() => onclick(value.id)}>
                                                                 <i className="material-icons">delete</i>
-                                                            </Link>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 ))

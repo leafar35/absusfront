@@ -6,6 +6,7 @@ import { Input } from '../../../components/Inputs';
 import { Button } from '../../../components/Buttom';
 import { IEmployee } from '../../../shared/iemployee';
 import { IProfileProps } from '../../../shared/iprofile.props';
+import { AxiosError } from 'axios';
 
 export default function CreateEmployee(){
     const navigate = useNavigate();
@@ -30,29 +31,33 @@ export default function CreateEmployee(){
 
     async function handleCreate(e: any) {
         e.preventDefault();
-        let employee: IEmployee
-        employee = {
-            name: e.target[2].value,
-            cpf: e.target[3].value,
-            dateofbirth: new Date(e.target[4].value),
-            zipcode: e.target[5].value,
-            address: e.target[6].value,
-            neighborhood: e.target[7].value,
-            number: e.target[8].value,
-            complement: e.target[9].value,
-            city: e.target[10].value,
-            state: e.target[11].value,
-            user: {
-                email_cellphone: e.target[12].value,
-                password: e.target[13].value,
-                profileId: profile,
+        try{
+            let employee: IEmployee
+            employee = {
+                name: e.target[2].value,
+                cpf: e.target[3].value,
+                dateofbirth: new Date(e.target[4].value),
+                zipcode: e.target[5].value,
+                address: e.target[6].value,
+                neighborhood: e.target[7].value,
+                number: e.target[8].value,
+                complement: e.target[9].value,
+                city: e.target[10].value,
+                state: e.target[11].value,
+                user: {
+                    email_cellphone: e.target[12].value,
+                    password: e.target[13].value,
+                    profileId: profile,
+                }
+            }
+            await Api.post('employee', employee)
+            return alert('sucesso')
+        }catch(e){
+            if(e instanceof AxiosError){
+                alert('error')
+                console.log(e.response?.data.message)
             }
         }
-        const response = await Api.post('employee', employee)
-        if(response.data){
-            return alert('sucesso')
-        }
-        alert('error')
     }
 
     function handleChange(e: any) {
@@ -150,10 +155,10 @@ export default function CreateEmployee(){
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s11">
-                                                    <Input label='Cidade' type='text' name='city' />
+                                                    <Input label='Cidade' type='text' name='city' value={city} />
                                                 </div>
                                                 <div className="input-field col s1">
-                                                    <Input label='Estado' type='text' name='state' />
+                                                    <Input label='Estado' type='text' name='state' value={state} />
                                                 </div>
                                             </div>
                                             <div className='row'>

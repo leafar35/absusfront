@@ -5,6 +5,7 @@ import { Button } from '../../../components/Buttom';
 import React, { useEffect, useState } from 'react';
 import { IEmployee } from '../../../shared/iemployee';
 import { useNavigate, useParams } from 'react-router-dom';
+import { AxiosError } from 'axios';
 
 export default function UpdateEmployee() {
     const navigate = useNavigate();
@@ -49,39 +50,45 @@ export default function UpdateEmployee() {
 
     async function handleUpdate(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        let employee: IEmployee
-        employee = {
-            id: id,
-            name: name,
-            cpf: cpf,
-            dateofbirth: new Date(dateofbirth),
-            zipcode: zipcode,
-            address: address,
-            number: number,
-            neighborhood: neighborhood,
-            complement: complment,
-            city: city,
-            state: state,
-            user: {
-                id: idUser,
-                email_cellphone: email,
-                password: password
+        try{
+            let employee: IEmployee
+            employee = {
+                id: id,
+                name: name,
+                cpf: cpf,
+                dateofbirth: new Date(dateofbirth),
+                zipcode: zipcode,
+                address: address,
+                number: number,
+                neighborhood: neighborhood,
+                complement: complment,
+                city: city,
+                state: state,
+                user: {
+                    id: idUser,
+                    email_cellphone: email,
+                    password: password
+                }
+            }
+            await Api.put('employee', employee)
+            return alert('sucesso')
+        }catch(e){
+            if(e instanceof AxiosError){
+                alert('error')
+                console.log(e.response?.data.message)
             }
         }
-        const response = await Api.put('employee', employee)
-        if(response.data){
-            return alert('sucesso')
-        }
-        alert('error')
     }
 
     async function findAddress(){
         if(zipcode.length >= 8){
-          const response = await Cep.get(`${zipcode}/json/`)
-          setZipcode(response.data.cep)
-          setAddress(response.data.logradouro)
-          setNeighborhood(response.data.bairro)
-          setComplment(response.data.complemento)
+            const response = await Cep.get(`${zipcode}/json/`)
+            setZipcode(response.data.cep)
+            setAddress(response.data.logradouro)
+            setNeighborhood(response.data.bairro)
+            setComplment(response.data.complemento)
+            setCity(response.data.localidade)
+            setState(response.data.uf)
         }
       }
 

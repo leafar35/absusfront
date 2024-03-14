@@ -5,6 +5,7 @@ import { Input } from '../../../components/Inputs';
 import { Button } from '../../../components/Buttom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IPatient } from '../../../shared/ipatient';
+import { AxiosError } from 'axios';
 
 const CreatePatient: React.FC = () => {
     const navigate = useNavigate();
@@ -51,32 +52,36 @@ const CreatePatient: React.FC = () => {
 
     async function handleUpdate(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        let patient: IPatient
-        patient = {
-            id: id,
-            name: name,
-            cpf: cpf,
-            dateofbirth: new Date(dateofbirth),
-            number_sus: number_sus,
-            number_post: number_post,
-            zipcode: zipcode,
-            address: address,
-            number: number,
-            neighborhood: neighborhood,
-            complement: complment,
-            city: city,
-            state: state,
-            user: {
-                id: userId,
-                email_cellphone: email,
-                password: password
+        try{
+            let patient: IPatient
+            patient = {
+                id: id,
+                name: name,
+                cpf: cpf,
+                dateofbirth: new Date(dateofbirth),
+                number_sus: number_sus,
+                number_post: number_post,
+                zipcode: zipcode,
+                address: address,
+                number: number,
+                neighborhood: neighborhood,
+                complement: complment,
+                city: city,
+                state: state,
+                user: {
+                    id: userId,
+                    email_cellphone: email,
+                    password: password
+                }
+            }
+            await Api.put('people', patient)
+            return alert('sucesso')
+        }catch(e){
+            if(e instanceof AxiosError){
+                alert('error')
+                console.log(e.response?.data.message)
             }
         }
-        const response = await Api.put('people', patient)
-        if(response.data){
-            return alert('sucesso')
-        }
-        alert('error')
     }
 
     async function findAddress(){

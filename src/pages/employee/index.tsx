@@ -7,12 +7,21 @@ export default function Employee(){
     const [data, setData] = useState<IPeople[]>([]);
 
     useEffect(() => {
-        async function getEmployee() {
-            const response = await Api.get('employee')
-            setData(response.data)   
-        }
         getEmployee()
     },[])
+
+    async function getEmployee() {
+        const response = await Api.get('employee')
+        setData(response.data)   
+    }
+
+    const deleteAsync = async (id: number | undefined) => {
+        const response = await Api.delete(`/employee/${id}`)
+        getEmployee()
+        if(response.data)
+            return alert('Deletado com sucesso')
+        return alert('Erro ao deletado com sucesso')
+    }
 
     return (
         <>
@@ -24,7 +33,7 @@ export default function Employee(){
                         mobile-screen widths are centered automatically.</p>
                     </div>
                 </div>
-                <Grid data={data} />
+                <Grid data={data} onclick={deleteAsync} />
             </div>
         </>
     );

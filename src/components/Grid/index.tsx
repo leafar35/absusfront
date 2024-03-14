@@ -1,10 +1,13 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-script-url */
 import { Link } from "react-router-dom";
 import { IPeople } from "../../shared/IPeople";
 interface IData{
-    data: Array<IPeople>
+    data: Array<IPeople>,
+    onclick: (id: number | undefined) => Promise<void>
 }
 
-export function Grid({data}: IData){
+export function Grid({data, onclick}: IData){
     return (
         <div className="row">
             <div className="col s12">
@@ -39,9 +42,9 @@ export function Grid({data}: IData){
                                                         <Link to={'update/'+value.id}>
                                                             <i className="material-icons">edit</i>
                                                         </Link>
-                                                        <Link to={'delete/'+value.id}>
+                                                        <a href='javascript:void(0)' onClick={() => onclick(value.id)}>
                                                             <i className="material-icons">delete</i>
-                                                        </Link>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             ))}

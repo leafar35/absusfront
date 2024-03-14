@@ -6,13 +6,22 @@ import { Schedule } from '../../components/Schedule';
 const List: React.FC = () => {
     const [data, setData] = useState<ISchedule[]>([]);
 
-    useEffect(() => {
-        async function getSchedule() {
-            const response = await Api.get('schedule')
-            setData(response.data)   
-        }
+    useEffect(() => {        
         getSchedule()
     },[])
+
+    async function getSchedule() {
+        const response = await Api.get('schedule')
+        setData(response.data)   
+    }
+
+    const deleteAsync = async (id: number | undefined) => {
+        const response = await Api.delete(`schedule/${id}`)
+        getSchedule()
+        if(response.data)
+            return alert('Deletado com sucesso')
+        return alert('Erro ao deletado')
+    }
 
     return (
         <>
@@ -24,7 +33,7 @@ const List: React.FC = () => {
                         mobile-screen widths are centered automatically.</p>
                     </div>
                 </div>
-                <Schedule data={data} />
+                <Schedule data={data} onclick={deleteAsync} />
             </div>
         </>
     );

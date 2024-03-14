@@ -7,12 +7,21 @@ export function Patients(){
     const [data, setData] = useState<IPeople[]>([]);
 
     useEffect(() => {
-        async function getPatients() {
-            const response = await Api.get('people')
-            setData(response.data)   
-        }
         getPatients()
     },[])
+
+    async function getPatients() {
+        const response = await Api.get('people')
+        setData(response.data)   
+    }
+
+    const deleteAsync = async (id: number | undefined) => {
+        const response = await Api.delete(`people/${id}`)
+        getPatients()
+        if(response.data)
+            return alert('Deletado com sucesso')
+        return alert('Erro ao deletado com sucesso')
+    }
 
     return (
         <>
@@ -24,7 +33,7 @@ export function Patients(){
                         mobile-screen widths are centered automatically.</p>
                     </div>
                 </div>
-                <Grid data={data} />
+                <Grid data={data} onclick={deleteAsync} />
             </div>
         </>
     );
