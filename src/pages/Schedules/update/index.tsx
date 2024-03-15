@@ -7,6 +7,8 @@ import { ISchedule } from '../../../shared/ischedule';
 import { IOptionProps } from '../../../shared/iselectinput';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IPeople } from '../../../shared/IPeople';
+import Swal from 'sweetalert2';
+import { AxiosError } from 'axios';
 
 const Updatechedule: React.FC = () => {
     const navigate = useNavigate();
@@ -61,20 +63,31 @@ const Updatechedule: React.FC = () => {
     async function handleUpdate(event: any) {
         event.preventDefault();
         let schedule: ISchedule
-        schedule = {
-            id: id,
-            title: event.target[2].value,
-            description: event.target[3].value,
-            dateTime: new Date(event.target[4].value),
-            localization: event.target[5].value,
-            google_maps_link: event.target[6].value,
-            peopleId: event.target[1].value
+        try{
+            schedule = {
+                id: id,
+                title: event.target[2].value,
+                description: event.target[3].value,
+                dateTime: new Date(event.target[4].value),
+                localization: event.target[5].value,
+                google_maps_link: event.target[6].value,
+                peopleId: event.target[1].value
+            }
+            await Api.put('schedule', schedule)
+            return Swal.fire({
+                title: 'Agendamento atualizado!',
+                icon: 'success',
+            })
+        }catch(e){
+            if(e instanceof AxiosError){
+                const html = `<div style="text-align: justify;">${e.response?.data.message.join('<Br />')}</div>`
+                Swal.fire({
+                    title: 'Corrija os seguinte erros!',
+                    icon: 'error',
+                    html: html
+                })
+            }
         }
-        const response = await Api.post('schedule', schedule)
-        if(response.data){
-            return alert('sucesso')
-        }
-        alert('error')
     }
 
     function handleGoBack(){        

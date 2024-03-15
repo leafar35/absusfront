@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { FocusEvent, useEffect, useState } from 'react';
 import Api from '../../../services/api';
 import Cep from '../../../services/cep';
@@ -51,11 +52,18 @@ export default function CreateEmployee(){
                 }
             }
             await Api.post('employee', employee)
-            return alert('sucesso')
+            return Swal.fire({
+                title: 'Funcionário cadastado!',
+                icon: 'success',
+            })
         }catch(e){
             if(e instanceof AxiosError){
-                alert('error')
-                console.log(e.response?.data.message)
+                const html = `<div style="text-align: justify;">${e.response?.data.message.join('<Br />')}</div>`
+                Swal.fire({
+                    title: 'Corrija os seguinte erros!',
+                    icon: 'error',
+                    html: html
+                })
             }
         }
     }

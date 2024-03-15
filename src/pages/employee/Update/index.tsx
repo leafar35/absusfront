@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { IEmployee } from '../../../shared/iemployee';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosError } from 'axios';
+import Swal from 'sweetalert2';
 
 export default function UpdateEmployee() {
     const navigate = useNavigate();
@@ -71,11 +72,18 @@ export default function UpdateEmployee() {
                 }
             }
             await Api.put('employee', employee)
-            return alert('sucesso')
+            return Swal.fire({
+                title: 'Funcionário atualizado!',
+                icon: 'success',
+            })
         }catch(e){
             if(e instanceof AxiosError){
-                alert('error')
-                console.log(e.response?.data.message)
+                const html = `<div style="text-align: justify;">${e.response?.data.message.join('<Br />')}</div>`
+                Swal.fire({
+                    title: 'Corrija os seguinte erros!',
+                    icon: 'error',
+                    html: html
+                })
             }
         }
     }

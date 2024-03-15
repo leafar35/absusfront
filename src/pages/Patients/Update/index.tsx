@@ -6,6 +6,7 @@ import { Button } from '../../../components/Buttom';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IPatient } from '../../../shared/ipatient';
 import { AxiosError } from 'axios';
+import Swal from 'sweetalert2';
 
 const CreatePatient: React.FC = () => {
     const navigate = useNavigate();
@@ -75,11 +76,18 @@ const CreatePatient: React.FC = () => {
                 }
             }
             await Api.put('people', patient)
-            return alert('sucesso')
+            return Swal.fire({
+                title: 'Paciente atualizado!',
+                icon: 'success',
+            })
         }catch(e){
             if(e instanceof AxiosError){
-                alert('error')
-                console.log(e.response?.data.message)
+                const html = `<div style="text-align: justify;">${e.response?.data.message.join('<Br />')}</div>`
+                Swal.fire({
+                    title: 'Corrija os seguinte erros!',
+                    icon: 'error',
+                    html: html
+                })
             }
         }
     }

@@ -3,6 +3,8 @@ import { IProfileEntity } from '../shared/iprofile';
 import { createContext, useEffect, useState } from 'react';
 import { IAuthProvider, IChildrenAuthProvider } from '../shared/auth';
 import Api from '../services/api';
+import { AxiosError } from 'axios';
+import Swal from 'sweetalert2';
 
 export const AuthContext = createContext<IAuthProvider>(null!);
 
@@ -40,8 +42,13 @@ function AuthProvider({ children }: IChildrenAuthProvider) {
         }catch(e){
             setLogged(false);
             setIsLoading(false)
-            if(e instanceof Error){
-                alert(e.message)
+            if(e instanceof AxiosError){
+                const html = `<div style="text-align: justify;">${e.response?.data.message.join('<Br />')}</div>`
+                Swal.fire({
+                    title: 'Corrija os seguinte erros!',
+                    icon: 'error',
+                    html: html
+                })
             }
         }
     }
