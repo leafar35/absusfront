@@ -17,7 +17,7 @@ export default function CreateSchedule(){
     useEffect(() => {
         async function getPatients(){
             const response = await Api.get('people')
-            const usermap = response.data.map((people: IPeople) => {
+            const usermap = response.data.data.map((people: IPeople) => {
                 return { label: people.name, value: people.id} 
             })
             setOptions(usermap)
@@ -29,7 +29,7 @@ export default function CreateSchedule(){
         return Api.get(`people?name=${name}`)
           .then((people: any) => {
             let options: any[] = []
-            people.data.forEach((people: IPeople) => {
+            people.data.data.forEach((people: IPeople) => {
               options.push({
                 label: people.name,
                 value: people.id

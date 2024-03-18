@@ -2,6 +2,7 @@ import Api from '../../services/api';
 import React, { useState, useEffect } from 'react';
 import { ISchedule } from '../../shared/ischedule';
 import { Schedule } from '../../components/Schedule';
+import Swal from 'sweetalert2';
 
 const List: React.FC = () => {
     const [data, setData] = useState<ISchedule[]>([]);
@@ -16,11 +17,18 @@ const List: React.FC = () => {
     }
 
     const deleteAsync = async (id: number | undefined) => {
-        const response = await Api.delete(`schedule/${id}`)
-        getSchedule()
-        if(response.data)
-            return alert('Deletado com sucesso')
-        return alert('Erro ao deletado')
+        Swal.fire({
+            title: 'Deseja mesmo deletar?',
+            icon: 'question'
+        }).then(async(value) => {
+            if(value.isConfirmed){
+                const response = await Api.delete(`schedule/${id}`)
+                getSchedule()
+                if(response.data)
+                    return Swal.fire('Deletado com sucesso','','success')
+                Swal.fire('Erro ao deletar','','error')
+            }
+        })
     }
 
     return (

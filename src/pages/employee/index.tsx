@@ -1,26 +1,34 @@
+import Swal from 'sweetalert2';
 import Api from '../../services/api';
 import { useState, useEffect } from 'react';
 import { Grid } from '../../components/Grid';
-import { IPeople } from '../../shared/IPeople';
+import { IPagination } from '../../shared/ipagination';
 
 export default function Employee(){
-    const [data, setData] = useState<IPeople[]>([]);
+    const [data, setData] = useState<IPagination>();
 
     useEffect(() => {
         getEmployee()
     },[])
 
-    async function getEmployee() {
+    async function getEmployee(page?: number, perPage?: number) {
         const response = await Api.get('employee')
         setData(response.data)   
     }
 
     const deleteAsync = async (id: number | undefined) => {
-        const response = await Api.delete(`/employee/${id}`)
-        getEmployee()
-        if(response.data)
-            return alert('Deletado com sucesso')
-        return alert('Erro ao deletado com sucesso')
+        Swal.fire({
+            title: 'Deseja mesmo deletar?',
+            icon: 'question'
+        }).then(async(value) => {
+            if(value.isConfirmed){
+                const response = await Api.delete(`/employee/${id}`)
+                getEmployee()
+                if(response.data)
+                    return Swal.fire('Deletado com sucesso','','success')
+                Swal.fire('Erro ao deletar','','error')
+            }
+        })
     }
 
     return (
@@ -33,7 +41,7 @@ export default function Employee(){
                         mobile-screen widths are centered automatically.</p>
                     </div>
                 </div>
-                <Grid data={data} onclick={deleteAsync} />
+                {data && <Grid data={data} onclick={deleteAsync} fetchData={getEmployee} />}                
             </div>
         </>
     );

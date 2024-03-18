@@ -1,26 +1,34 @@
 import Api from '../../services/api';
 import { useState, useEffect } from 'react';
 import { Grid } from '../../components/Grid';
-import { IPeople } from '../../shared/IPeople';
+import Swal from 'sweetalert2';
+import { IPagination } from '../../shared/ipagination';
 
 export function Patients(){
-    const [data, setData] = useState<IPeople[]>([]);
+    const [data, setData] = useState<IPagination>();
 
     useEffect(() => {
         getPatients()
     },[])
 
-    async function getPatients() {
+    async function getPatients(page?: number, perPage?: number) {
         const response = await Api.get('people')
         setData(response.data)   
     }
 
     const deleteAsync = async (id: number | undefined) => {
-        const response = await Api.delete(`people/${id}`)
-        getPatients()
-        if(response.data)
-            return alert('Deletado com sucesso')
-        return alert('Erro ao deletado com sucesso')
+        Swal.fire({
+            title: 'Deseja mesmo deletar?',
+            icon: 'question'
+        }).then(async(value) => {
+            if(value.isConfirmed){
+                const response = await Api.delete(`people/${id}`)
+                getPatients()
+                if(response.data)
+                    return Swal.fire('Deletado com sucesso','','success')
+                Swal.fire('Erro ao deletar','','error')
+            }
+        })
     }
 
     return (
@@ -33,7 +41,7 @@ export function Patients(){
                         mobile-screen widths are centered automatically.</p>
                     </div>
                 </div>
-                <Grid data={data} onclick={deleteAsync} />
+                {data && <Grid data={data} onclick={deleteAsync} fetchData={getPatients} />}
             </div>
         </>
     );
