@@ -43,11 +43,17 @@ function AuthProvider({ children }: IChildrenAuthProvider) {
             setLogged(false);
             setIsLoading(false)
             if(e instanceof AxiosError){
-                const html = `<div style="text-align: justify;">${e.response?.data.message.join('<Br />')}</div>`
-                Swal.fire({
-                    title: 'Corrija os seguinte erros!',
+                if(e.response?.data.message && e.response?.data.message instanceof Array){
+                    const html = `<div style="text-align: justify;">${e.response?.data.message.join('<Br />')}</div>`
+                    return Swal.fire({
+                        title: 'Corrija os seguinte erros!',
+                        icon: 'error',
+                        html: html
+                    })
+                }
+                return Swal.fire({
+                    title: e.response?.data.message,
                     icon: 'error',
-                    html: html
                 })
             }
         }

@@ -1,53 +1,26 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-script-url */
-import { Link } from "react-router-dom";
-import { IPeople } from "../../shared/IPeople";
-import { TableColumn } from "react-data-table-component";
 import { ViewBorderlessTable, DataTableCustom } from "./styled";
 import { IPagination } from "../../shared/ipagination";
+import { useState } from "react";
+import { TableColumn } from "react-data-table-component";
 
 interface IData{
     data: IPagination,
-    onclick: (id: number | undefined) => Promise<void>
-    fetchData: (page?: number, perPage?: number) => Promise<void>
+    columns: TableColumn<any>[]
+    fetchData: (event?: any, page?: number, perPage?: number) => Promise<void>
 }
 
-export function Grid({data, onclick, fetchData}: IData){
-    const keys: TableColumn<IPeople>[] = [
-        {
-            name: 'name',
-            selector: row => row.name,
-        },
-        {
-            name: 'dateofbirth',
-            selector: row => row?.dateofbirth?.toString(),
-        },
-        {
-            name: 'user.email_cellphone',
-            selector: row => row?.user.email_cellphone,
-        },
-        {
-            name: '#',
-            cell(row) {
-                const id = (row?.id) ? row.id : undefined
-                return (
-                    <>
-                        <Link to={'update/'+id}>
-                            <i className="material-icons">edit</i>
-                        </Link>
-                        <a href='javascript:void(0)' onClick={() => onclick(id)}>
-                            <i className="material-icons">delete</i>
-                        </a>
-                    </>
-                )
-            },
-        },
-    ]
+export function Grid({data, columns, fetchData}: IData){
+    const [page, setPage] = useState<number>(1)
+    const [perPage, setPerPage] = useState<number>(10)
     const handlePageChange = (page: number) => {
-        fetchData(page)
+        setPage(page)
+        fetchData(null, page, perPage)
     }
     const handleRowsPerPageChange = (perPage: number) => {
-        fetchData(undefined, perPage)
+        setPerPage(perPage)
+        fetchData(null, page, perPage)
     }
     const paginationComponentOptions = {
         rowsPerPageText: 'por página',
@@ -71,7 +44,7 @@ export function Grid({data, onclick, fetchData}: IData){
                             <div className="row">
                                 <div className="col s12">
                                     <DataTableCustom
-                                        columns={keys}
+                                        columns={columns}
                                         data={data.data}
                                         pagination
                                         paginationServer

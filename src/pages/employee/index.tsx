@@ -1,8 +1,13 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import Swal from 'sweetalert2';
 import Api from '../../services/api';
+import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Grid } from '../../components/Grid';
 import { IPagination } from '../../shared/ipagination';
+import { Input } from '../../components/Inputs';
+import { Button } from '../../components/Buttom';
+import { keysGrid } from "../../shared/constants/key.grid";
 
 export default function Employee(){
     const [data, setData] = useState<IPagination>();
@@ -11,8 +16,17 @@ export default function Employee(){
         getEmployee()
     },[])
 
-    async function getEmployee(page?: number, perPage?: number) {
-        const response = await Api.get('employee')
+    async function getEmployee(e?:any, page?: number, perPage?: number) {
+        let query = (page) ? `?page=${page}&perPage=${perPage}` : ''
+        if(e){
+            e.preventDefault();
+            if(!query){
+                query += `?name=${e.target[0].value}`
+            }else{
+                query += `&name=${e.target[0].value}`
+            }
+        }
+        const response = await Api.get(`employee${query}`)
         setData(response.data)   
     }
 
@@ -31,17 +45,46 @@ export default function Employee(){
         })
     }
 
-    return (
+    return (        
         <>
+            {keysGrid.length === 3 &&
+                keysGrid.push({
+                    name: '#',
+                    cell(row) {
+                        const id = (row?.id) ? row.id : undefined
+                        return (
+                            <>
+                                <Link to={'update/'+id}>
+                                    <i className="material-icons">edit</i>
+                                </Link>
+                                <a href='javascript:void(0)' onClick={() => deleteAsync(id)}>
+                                    <i className="material-icons">delete</i>
+                                </a>
+                            </>
+                        )
+                    },
+                })
+            }
             <div className="section">
                 <div className="card">
                     <div className="card-content">
-                    <p className="caption mb-0">Tables are a nice way to organize a lot of data. We provide a few utility classes to help
-                        you style your table as easily as possible. In addition, to improve mobile experience, all tables on
-                        mobile-screen widths are centered automatically.</p>
+                        <div className="row">
+                            <form onSubmit={getEmployee}>
+                                <div className='row'>
+                                    <div className="input-field col s10">
+                                        <Input label='Nome' type='text' name='name' />
+                                    </div>
+                                    <div className="input-field col s2">
+                                        <Button className='btn waves-effect waves-light mt-4'>
+                                            Filtrar
+                                        </Button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                {data && <Grid data={data} onclick={deleteAsync} fetchData={getEmployee} />}                
+                {data && <Grid data={data} fetchData={getEmployee} columns={keysGrid} />}
             </div>
         </>
     );

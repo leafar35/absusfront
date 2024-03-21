@@ -21,11 +21,12 @@ const Updatechedule: React.FC = () => {
     const [localization, setlocalization] = useState<string>('')
     const [google_maps_link, setGooleMapsLink] = useState<string>('')
     const [peopleId, setPeopleId] = useState<number>(0)
+    const [valueDefault, setValueDefault] = useState<IOptionProps>()
 
     useEffect(() => {
         async function getPatients(){
             const response = await Api.get('people')
-            const usermap = response.data.map((people: IPeople) => {
+            const usermap = response.data.data.map((people: IPeople) => {
                 return { label: people.name, value: people.id} 
             })
             setOptions(usermap)
@@ -40,6 +41,7 @@ const Updatechedule: React.FC = () => {
             setlocalization(response.data.localization)
             setGooleMapsLink(response.data.google_maps_link)
             setPeopleId(response.data.people.id)
+            setValueDefault({label: response.data.people.name, value: response.data.people.id})
         }
 
         getSchedule()
@@ -124,7 +126,7 @@ const Updatechedule: React.FC = () => {
                                                         options={options} 
                                                         loadOptions={loadOptions} 
                                                         name='peopleId'
-                                                        defaultValue={peopleId}
+                                                        value={valueDefault}
                                                         placeholder='Buscar paciente' 
                                                     />
                                                 </div>
