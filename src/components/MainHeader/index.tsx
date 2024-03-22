@@ -1,4 +1,30 @@
+import { useContext, useEffect } from "react";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../contexts/AuthContext";
+
 export function MainHeader(){
+    const { sigOuth } = useContext(AuthContext)
+    useEffect(() => {
+        var elems = document.querySelectorAll('.profile-button, .notification-button');
+        M.Dropdown.init(elems, {
+            inDuration: 300,
+            outDuration: 300,
+            constrainWidth: false,
+            hover: false,
+            coverTrigger: false,
+            alignment: 'right',
+            closeOnClick: false
+        })
+    },[])
+
+    const logout = (e: any) => {
+        e.preventDefault();
+        Swal.fire('Deseja mesmo sair?', '', 'question').then((value) => {
+            if(value.isConfirmed){
+                return sigOuth()
+            }
+        })
+    }
 
     return (
         <header className="page-topbar" id="header">
@@ -17,7 +43,7 @@ export function MainHeader(){
                             </li>
                             <li>
                                 <a className="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown">
-                                    <i className="material-icons">notifications_none<small className="notification-badge">5</small></i>
+                                    <i className="material-icons">notifications_none<small className="notification-badge">1</small></i>
                                 </a>
                             </li>
                             <li>
@@ -35,30 +61,32 @@ export function MainHeader(){
                         </ul>
                         <ul className="dropdown-content" id="notifications-dropdown">
                             <li>
-                                <h6>NOTIFICATIONS<span className="new badge">5</span></h6>
+                                <h6>NOTIFICATIONS<span className="new badge">1</span></h6>
                             </li>
                             <li className="divider"></li>
                             <li>
-                                <a className="black-text" href="#!"><span className="material-icons icon-bg-circle cyan small">add_shopping_cart</span> A new order has been placed!</a>
+                                <a className="black-text" href="#!">
+                                    <span className="material-icons icon-bg-circle cyan small">add_shopping_cart</span> A new order has been placed!
+                                </a>
                                 <time className="media-meta grey-text darken-2" dateTime="2015-06-12T20:50:48+08:00">2 hours ago</time>
                             </li>
                         </ul>
                         <ul className="dropdown-content" id="profile-dropdown">
                             <li>
-                                <a className="grey-text text-darken-1" href="user-profile-page.html"><i className="material-icons">person_outline</i> Profile</a>
+                                <a className="grey-text text-darken-1" href="user-profile-page.html">
+                                    <i className="material-icons">person_outline</i> Perfil
+                                </a>
                             </li>
                             <li>
-                                <a className="grey-text text-darken-1" href="app-chat.html"><i className="material-icons">chat_bubble_outline</i> Chat</a>
-                            </li>
-                            <li>
-                                <a className="grey-text text-darken-1" href="page-faq.html"><i className="material-icons">help_outline</i> Help</a>
+                                <a className="grey-text text-darken-1" href="page-faq.html">
+                                    <i className="material-icons">help_outline</i> Ajuda
+                                </a>
                             </li>
                             <li className="divider"></li>
                             <li>
-                                <a className="grey-text text-darken-1" href="user-lock-screen.html"><i className="material-icons">lock_outline</i> Lock</a>
-                            </li>
-                            <li>
-                                <a className="grey-text text-darken-1" href="user-login.html"><i className="material-icons">keyboard_tab</i> Logout</a>
+                                <a onClick={logout} className="grey-text text-darken-1" href="#">
+                                    <i className="material-icons">keyboard_tab</i> Sair
+                                </a>
                             </li>
                         </ul>
                     </div>

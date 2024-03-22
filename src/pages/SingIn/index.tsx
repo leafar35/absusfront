@@ -1,11 +1,11 @@
-import { FormEvent, useContext, useEffect } from 'react';
-import logoImg from '../../assets/logo.jpeg';
+import { FormEvent, useContext, useEffect, useState } from 'react';
 import { Input } from '../../components/Inputs';
 import { Button } from '../../components/Buttom';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Loginpage } from './styles';
 
 export function SingIn() {
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const { signIn } = useContext(AuthContext);
 
     useEffect(() => {
@@ -14,14 +14,16 @@ export function SingIn() {
         classnames.map(value => document.body.classList.add(value))
     },[])
 
-    function handleLogin(e: FormEvent<HTMLFormElement>){
+    async function handleLogin(e: FormEvent<HTMLFormElement>){
         const email = (e.currentTarget.elements[0] as HTMLInputElement).value
         const password = (e.currentTarget.elements[1] as HTMLInputElement).value
         e.preventDefault()
-        signIn({
+        setIsLoading(true)
+        await signIn({
             email_cellphone: email,
             password: password
         })
+        setIsLoading(false)
     }
 
     return (
@@ -51,24 +53,21 @@ export function SingIn() {
                                     <p>
                                         <label>
                                             <input type="checkbox" />
-                                            <span>Remember Me</span>
+                                            <span>Mantenha-se conectado </span>
                                         </label>
                                     </p>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <Button className='btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12'>
+                                        <Button isLoading={isLoading} className='btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12'>
                                             Entrar
                                         </Button>
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="input-field col s6 m6 l6">
-                                        <p className="margin medium-small"><a href="user-register.html">Register Now!</a></p>
-                                    </div>
-                                    <div className="input-field col s6 m6 l6">
-                                        <p className="margin right-align medium-small"><a href="user-forgot-password.html">Forgot password ?</a></p>
+                                    <div className="input-field col s12">
+                                        <p className="margin medium-small"><a href="user-forgot-password.html">Esqueceu sua senha ?</a></p>
                                     </div>
                                 </div>
                             </form>

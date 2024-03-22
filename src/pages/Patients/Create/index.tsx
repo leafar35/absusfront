@@ -17,6 +17,7 @@ const CreatePatient: React.FC = () => {
     const [city, setCity] = useState<string>('');
     const [state, setState] = useState<string>('');
     const [neighborhood, setNeighborhood] = useState<string>('')
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     async function handleCreate(e: any) {
         e.preventDefault();
@@ -163,10 +164,10 @@ const CreatePatient: React.FC = () => {
                                                 </div>
                                             </div>
                                             <div className='row'>
-                                                <Button className='btn waves-effect waves-light col s1 red'>
+                                                <Button isLoading={false} className='btn waves-effect waves-light col s1 red'>
                                                     Voltar
                                                 </Button>
-                                                <Button className='btn waves-effect waves-light col s1 right'>
+                                                <Button isLoading={isLoading} className='btn waves-effect waves-light col s1 right'>
                                                     Cadastrar
                                                 </Button>
                                             </div>

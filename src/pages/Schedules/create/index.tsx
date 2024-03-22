@@ -13,6 +13,7 @@ import { AxiosError } from 'axios';
 export default function CreateSchedule(){
     const navigate = useNavigate();
     const [options, setOptions] = useState<Array<IOptionProps>>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
         async function getPatients(){
@@ -132,10 +133,10 @@ export default function CreateSchedule(){
                                                 </div>
                                             </div>
                                             <div className='row'>
-                                                <Button className='btn waves-effect waves-light col s1 red'>
+                                                <Button isLoading={false} className='btn waves-effect waves-light col s1 red'>
                                                     Voltar
                                                 </Button>
-                                                <Button className='btn waves-effect waves-light col s1 right'>
+                                                <Button isLoading={isLoading} className='btn waves-effect waves-light col s1 right'>
                                                     Cadastrar
                                                 </Button>
                                             </div>

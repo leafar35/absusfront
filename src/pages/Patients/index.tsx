@@ -9,6 +9,7 @@ import { keysGrid } from "../../shared/constants/key.grid";
 import { Link } from 'react-router-dom';
 
 export function Patients(){
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [data, setData] = useState<IPagination>();
 
     useEffect(() => {
@@ -25,8 +26,10 @@ export function Patients(){
                 query += `&name=${e.target[0].value}`
             }
         }
+        setIsLoading(true)
         const response = await Api.get(`people${query}`)
-        setData(response.data)   
+        setData(response.data)
+        setIsLoading(false)
     }
 
     const deleteAsync = async (id: number | undefined) => {
@@ -74,7 +77,7 @@ export function Patients(){
                                         <Input label='Nome' type='text' name='name' />
                                     </div>
                                     <div className="input-field col s2">
-                                        <Button className='btn waves-effect waves-light mt-4'>
+                                        <Button isLoading={isLoading} sizeLoader={5} className='btn waves-effect waves-light mt-4'>
                                             Filtrar
                                         </Button>
                                     </div>
@@ -83,7 +86,7 @@ export function Patients(){
                         </div>
                     </div>
                 </div>
-                {data && <Grid data={data} fetchData={getPatients} columns={keysGrid} />}
+                {data && <Grid data={data} fetchData={getPatients} columns={keysGrid} title='Listagem de pacientes' />}
             </div>
         </>
     );

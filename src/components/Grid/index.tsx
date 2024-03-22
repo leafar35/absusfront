@@ -9,9 +9,10 @@ interface IData{
     data: IPagination,
     columns: TableColumn<any>[]
     fetchData: (event?: any, page?: number, perPage?: number) => Promise<void>
+    title?: string
 }
 
-export function Grid({data, columns, fetchData}: IData){
+export function Grid({data, columns, fetchData, title = 'Listagem de Funcionários'}: IData){
     const [page, setPage] = useState<number>(1)
     const [perPage, setPerPage] = useState<number>(10)
     const handlePageChange = (page: number) => {
@@ -36,7 +37,7 @@ export function Grid({data, columns, fetchData}: IData){
                         <div className="card-title">
                             <div className="row">
                                 <div className="col s12 m6 l10">
-                                    <h4 className="card-title">Listagem de Funcionários</h4>
+                                    <h4 className="card-title">{title}</h4>
                                 </div>
                             </div>
                         </div>

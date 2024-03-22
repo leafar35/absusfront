@@ -10,6 +10,7 @@ import { Button } from '../../components/Buttom';
 import { keysGrid } from "../../shared/constants/key.grid";
 
 export default function Employee(){
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [data, setData] = useState<IPagination>();
 
     useEffect(() => {
@@ -26,8 +27,10 @@ export default function Employee(){
                 query += `&name=${e.target[0].value}`
             }
         }
+        setIsLoading(true)
         const response = await Api.get(`employee${query}`)
         setData(response.data)   
+        setIsLoading(false)
     }
 
     const deleteAsync = async (id: number | undefined) => {
@@ -75,7 +78,7 @@ export default function Employee(){
                                         <Input label='Nome' type='text' name='name' />
                                     </div>
                                     <div className="input-field col s2">
-                                        <Button className='btn waves-effect waves-light mt-4'>
+                                        <Button isLoading={isLoading} sizeLoader={5} className='btn waves-effect waves-light mt-4'>
                                             Filtrar
                                         </Button>
                                     </div>

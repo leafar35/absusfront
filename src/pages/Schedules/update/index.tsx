@@ -22,6 +22,7 @@ const Updatechedule: React.FC = () => {
     const [google_maps_link, setGooleMapsLink] = useState<string>('')
     const [peopleId, setPeopleId] = useState<number>(0)
     const [valueDefault, setValueDefault] = useState<IOptionProps>()
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
         async function getPatients(){
@@ -157,10 +158,10 @@ const Updatechedule: React.FC = () => {
                                                 </div>
                                             </div>
                                             <div className='row'>
-                                                <Button className='btn waves-effect waves-light col s1 red'>
+                                                <Button isLoading={false} className='btn waves-effect waves-light col s1 red'>
                                                     Voltar
                                                 </Button>
-                                                <Button className='btn waves-effect waves-light col s1 right'>
+                                                <Button isLoading={isLoading} className='btn waves-effect waves-light col s1 right'>
                                                     Cadastrar
                                                 </Button>
                                             </div>

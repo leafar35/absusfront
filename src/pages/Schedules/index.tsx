@@ -12,6 +12,7 @@ import { IOptionProps } from '../../shared/iselectinput';
 
 const List: React.FC = () => {
     const [data, setData] = useState<IPagination>();
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [options, setOptions] = useState<Array<IOptionProps>>([])
 
     useEffect(() => {        
@@ -51,8 +52,10 @@ const List: React.FC = () => {
                 query += `&peopleId=${e.target[1].value}`
             }
         }
+        setIsLoading(true)
         const response = await Api.get(`schedule${query}`)
-        setData(response.data)   
+        setData(response.data)
+        setIsLoading(false)
     }
 
     const deleteAsync = async (id: number | undefined) => {
@@ -123,7 +126,7 @@ const List: React.FC = () => {
                                         />
                                     </div>
                                     <div className="input-field col s2">
-                                        <Button className='btn waves-effect waves-light mt-4'>
+                                        <Button isLoading={isLoading} sizeLoader={5} className='btn waves-effect waves-light mt-4'>
                                             Filtrar
                                         </Button>
                                     </div>
@@ -132,7 +135,7 @@ const List: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                {data && <Grid data={data} fetchData={getSchedule} columns={keysGridSchedule} />}
+                {data && <Grid data={data} fetchData={getSchedule} columns={keysGridSchedule} title='Agendamentos' />}
             </div>
         </>
     );

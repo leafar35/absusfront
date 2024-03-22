@@ -1,6 +1,7 @@
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import { ISchedule } from '../../shared/ischedule'
+import Swal from 'sweetalert2'
 
 interface IDataISchedule {
     data: ISchedule[]
@@ -9,13 +10,15 @@ interface IDataISchedule {
 export function Calendar({data}: IDataISchedule){
     
     function renderEventContent(eventInfo: any) {
-        console.log('entrou ', eventInfo.event.title, eventInfo.event.dateTime)
         return (
           <>
-            <b>{eventInfo.timeText}</b>
-            <i>{eventInfo.event.title}</i>
+            <p>{`Consulta: ${eventInfo.event.title}`}<br />{`Hora marcada: ${eventInfo.timeText}`}</p>
           </>
         )
+    }
+
+    function alertEventContent(eventInfo: any) {
+        Swal.fire(eventInfo.event.title, '', 'info')
     }
 
     return (
@@ -25,9 +28,9 @@ export function Calendar({data}: IDataISchedule){
             plugins={[ dayGridPlugin ]}
             initialView="dayGridMonth"
             events={data.map((value) => {
-                return {title: value.title, date: value.dateTime}
+                return {title: value.title, start: value.dateTime}
             })}
-            eventClick={renderEventContent}
+            eventClick={alertEventContent}
         />
     )
 }

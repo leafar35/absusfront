@@ -25,6 +25,7 @@ export default function UpdateEmployee() {
     const [idUser, setIdUser] = useState<number | undefined>(undefined)
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
         const elems = document.querySelectorAll('select');
@@ -196,10 +197,10 @@ export default function UpdateEmployee() {
                                                 </div>
                                             </div>
                                             <div className='row'>
-                                                <Button className='btn waves-effect waves-light col s1 red'>
+                                                <Button isLoading={false} className='btn waves-effect waves-light col s1 red'>
                                                     Voltar
                                                 </Button>
-                                                <Button className='btn waves-effect waves-light col s1 right'>
+                                                <Button isLoading={isLoading} className='btn waves-effect waves-light col s1 right'>
                                                     Cadastrar
                                                 </Button>
                                             </div>

@@ -11,6 +11,7 @@ import { AxiosError } from 'axios';
 
 export default function CreateEmployee(){
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [profile, setProfile] = useState<number>(0)
     const [profiles, setProfiles] = useState<Array<IProfileProps> | null>(null)
     const [address, setAddress] = useState<string>('')
@@ -178,10 +179,10 @@ export default function CreateEmployee(){
                                                 </div>
                                             </div>
                                             <div className='row'>
-                                                <Button className='btn waves-effect waves-light col s1 red'>
+                                                <Button isLoading={false} className='btn waves-effect waves-light col s1 red'>
                                                     Voltar
                                                 </Button>
-                                                <Button className='btn waves-effect waves-light col s1 right'>
+                                                <Button isLoading={isLoading} className='btn waves-effect waves-light col s1 right'>
                                                     Cadastrar
                                                 </Button>
                                             </div>

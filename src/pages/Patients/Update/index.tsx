@@ -27,6 +27,7 @@ const CreatePatient: React.FC = () => {
     const [userId, setUserId] = useState<number | undefined>()
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
         async function getPatientForUpdate() {
@@ -186,10 +187,10 @@ const CreatePatient: React.FC = () => {
                                                 </div>
                                             </div>
                                             <div className='row'>
-                                                <Button className='btn waves-effect waves-light col s1 red'>
+                                                <Button isLoading={false} className='btn waves-effect waves-light col s1 red'>
                                                     Voltar
                                                 </Button>
-                                                <Button className='btn waves-effect waves-light col s1 right'>
+                                                <Button isLoading={isLoading} className='btn waves-effect waves-light col s1 right'>
                                                     Cadastrar
                                                 </Button>
                                             </div>
