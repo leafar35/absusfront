@@ -9,6 +9,7 @@ interface IDataISchedule {
 export function Calendar({data}: IDataISchedule){
     
     function renderEventContent(eventInfo: any) {
+        console.log('entrou ', eventInfo.event.title, eventInfo.event.dateTime)
         return (
           <>
             <b>{eventInfo.timeText}</b>
