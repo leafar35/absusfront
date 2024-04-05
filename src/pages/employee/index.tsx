@@ -7,7 +7,7 @@ import { Grid } from '../../components/Grid';
 import { IPagination } from '../../shared/ipagination';
 import { Input } from '../../components/Inputs';
 import { Button } from '../../components/Buttom';
-import { keysGrid } from "../../shared/constants/key.grid";
+import { keysGridEmployee } from "../../shared/constants/key.grid.employee";
 
 export default function Employee(){
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -50,8 +50,8 @@ export default function Employee(){
 
     return (        
         <>
-            {keysGrid.length === 3 &&
-                keysGrid.push({
+            {keysGridEmployee.length === 3 &&
+                keysGridEmployee.push({
                     name: '#',
                     cell(row) {
                         const id = (row?.id) ? row.id : undefined
@@ -74,20 +74,22 @@ export default function Employee(){
                         <div className="row">
                             <form onSubmit={getEmployee}>
                                 <div className='row'>
-                                    <div className="input-field col s10">
-                                        <Input label='Nome' type='text' name='name' />
-                                    </div>
-                                    <div className="input-field col s2">
-                                        <Button isLoading={isLoading} sizeLoader={5} className='btn waves-effect waves-light mt-4'>
-                                            Filtrar
-                                        </Button>
+                                    <div className='col s12'>
+                                        <div className="input-field col s10">
+                                            <Input label='Nome' type='text' name='name' />
+                                        </div>
+                                        <div className="input-field col s2">
+                                            <Button isLoading={isLoading} sizeLoader={5} className='btn waves-effect waves-light gradient-45deg-indigo-blue mt-4 mb-1 mr-1'>
+                                                <i className="material-icons left">search</i> Filtrar
+                                            </Button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                {data && <Grid data={data} fetchData={getEmployee} columns={keysGrid} />}
+                {data && <Grid data={data} fetchData={getEmployee} columns={keysGridEmployee} />}
             </div>
         </>
     );

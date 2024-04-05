@@ -2,7 +2,7 @@ import { FormEvent, useContext, useEffect, useState } from 'react';
 import { Input } from '../../components/Inputs';
 import { Button } from '../../components/Buttom';
 import { AuthContext } from '../../contexts/AuthContext';
-import { Loginpage } from './styles';
+import { Image, Loginpage } from './styles';
 
 export function SingIn() {
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -34,8 +34,8 @@ export function SingIn() {
                         <div className="col s12 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
                             <form className="login-form" onSubmit={handleLogin}>
                                 <div className="row">
-                                    <div className="input-field col s12">
-                                        <h5 className="ml-4">Sign in</h5>
+                                    <div className="input-field col s12 center">
+                                        <Image src='/logo.png' alt='Logo absus' />
                                     </div>
                                 </div>
                                 <div className="row margin">
@@ -60,7 +60,7 @@ export function SingIn() {
                                 </div>
                                 <div className="row">
                                     <div className="input-field col s12">
-                                        <Button isLoading={isLoading} className='btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12'>
+                                        <Button isLoading={isLoading} className='btn waves-effect waves-light border-round gradient-45deg-indigo-blue col s12'>
                                             Entrar
                                         </Button>
                                     </div>

@@ -21,3 +21,8 @@ export const Loginpage = styled.div`
         margin-left: 0 !important;
     }
 `;
+
+export const Image = styled.img`
+    width: 10%;
+    height: 10%;
+`

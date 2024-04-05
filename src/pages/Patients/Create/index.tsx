@@ -164,12 +164,14 @@ const CreatePatient: React.FC = () => {
                                                 </div>
                                             </div>
                                             <div className='row'>
-                                                <Button isLoading={false} className='btn waves-effect waves-light col s1 red'>
-                                                    Voltar
-                                                </Button>
-                                                <Button isLoading={isLoading} className='btn waves-effect waves-light col s1 right'>
-                                                    Cadastrar
-                                                </Button>
+                                                <div className='col s12'>
+                                                    <Button isLoading={false} className='btn waves-effect waves-light gradient-45deg-red-pink left'>
+                                                        <i className="material-icons left">arrow_back</i> Voltar
+                                                    </Button>
+                                                    <Button isLoading={isLoading} className='btn waves-effect waves-light gradient-45deg-indigo-blue right'>
+                                                        <i className="material-icons right">save</i> Cadastrar
+                                                    </Button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

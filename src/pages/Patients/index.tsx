@@ -73,20 +73,22 @@ export function Patients(){
                         <div className="row">
                             <form onSubmit={getPatients}>
                                 <div className='row'>
-                                    <div className="input-field col s10">
-                                        <Input label='Nome' type='text' name='name' />
-                                    </div>
-                                    <div className="input-field col s2">
-                                        <Button isLoading={isLoading} sizeLoader={5} className='btn waves-effect waves-light mt-4'>
-                                            Filtrar
-                                        </Button>
+                                    <div className='col s12'>
+                                        <div className="input-field col s10">
+                                            <Input label='Nome' type='text' name='name' />
+                                        </div>
+                                        <div className="input-field col s2">
+                                            <Button isLoading={isLoading} sizeLoader={5} className='btn waves-effect waves-light gradient-45deg-indigo-blue mt-4'>
+                                                <i className="material-icons left">search</i> Filtrar
+                                            </Button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                {data && <Grid data={data} fetchData={getPatients} columns={keysGrid} title='Listagem de pacientes' />}
+                {data && <Grid data={data} fetchData={getPatients} columns={keysGrid} title='Pacientes' />}
             </div>
         </>
     );

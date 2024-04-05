@@ -9,7 +9,7 @@ export function Content({ children }: Props){
     return (
         <Main id='main'>
             <div className='row'>
-                <div className="content-wrapper-before gradient-45deg-indigo-purple"></div>
+                <div className="content-wrapper-before gradient-45deg-indigo-blue"></div>
                 <BreadCrumb />
                 <div className="col s12">
                     <Container className='container'>

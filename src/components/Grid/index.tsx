@@ -12,7 +12,7 @@ interface IData{
     title?: string
 }
 
-export function Grid({data, columns, fetchData, title = 'Listagem de Funcionários'}: IData){
+export function Grid({data, columns, fetchData, title = 'Funcionários'}: IData){
     const [page, setPage] = useState<number>(1)
     const [perPage, setPerPage] = useState<number>(10)
     const handlePageChange = (page: number) => {

@@ -13,11 +13,14 @@ export function Aside(){
       <div className="brand-sidebar">
         <h1 className="logo-wrapper">
           <a className="brand-logo darken-1" href="index.html">
-            <img className="hide-on-med-and-down" src="./logo/materialize-logo-color.png" alt="materialize logo"/>
-            <img className="show-on-medium-and-down hide-on-med-and-up" src="./logo/materialize-logo.png" alt="materialize logo"/>
-            <span className="logo-text hide-on-med-and-down">Materialize</span>
+            <img style={{'height': '35px'}} className="hide-on-med-and-down" src="./logo.png" alt="materialize logo"/>
+            <img className="show-on-medium-and-down hide-on-med-and-up" src="./logo.png" alt="materialize logo"/>
+            <span style={{fontSize: '1.4rem'}} className="logo-text hide-on-med-and-down">Agendamentos</span>
           </a>
-          <a className="navbar-toggler" href="#"><i className="material-icons">radio_button_checked</i></a></h1>
+          {/* <a className="navbar-toggler" href="#">
+            <i className="material-icons">radio_button_checked</i>
+          </a> */}
+        </h1>
       </div>
       <ul className="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
         <li className="active bold">
@@ -98,11 +101,6 @@ export function Aside(){
         <li className="bold">
           <Link to="/calendary">
             <i className="material-icons">today</i><span className="menu-title" data-i18n="Calendar">Calendário</span>
-          </Link>
-        </li>
-        <li className="bold">
-          <Link to="/users" className="waves-effect waves-cyan">
-            <i className="material-icons">face</i><span className="menu-title" data-i18n="User">Usuários</span>
           </Link>
         </li>
       </ul>

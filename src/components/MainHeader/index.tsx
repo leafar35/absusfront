@@ -29,7 +29,7 @@ export function MainHeader(){
     return (
         <header className="page-topbar" id="header">
             <div className="navbar navbar-fixed"> 
-                <nav className="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-purple no-shadow">
+                <nav className="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-blue no-shadow">
                     <div className="nav-wrapper">
                         <div className="header-search-wrapper hide-on-med-and-down"><i className="material-icons">search</i>
                             <input className="header-search-input z-depth-2" type="text" name="Search" placeholder="Explore Materialize" data-search="template-list" />
