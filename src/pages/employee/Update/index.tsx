@@ -80,7 +80,8 @@ export default function UpdateEmployee() {
                 user: {
                     id: idUser,
                     email_cellphone: email,
-                    password: password
+                    password: password,
+                    profileId: profile,
                 }
             }
             await Api.put('employee', employee)

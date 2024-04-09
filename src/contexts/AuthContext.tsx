@@ -64,6 +64,7 @@ function AuthProvider({ children }: IChildrenAuthProvider) {
         localStorage.removeItem('@absus:token-refresh');
         setLogged(false);
         setIsLoading(false)
+        window.location.replace('/')
     }
 
     return (
