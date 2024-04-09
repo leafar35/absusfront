@@ -7,10 +7,12 @@ import { IEmployee } from '../../../shared/iemployee';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import Swal from 'sweetalert2';
+import { IProfileProps } from '../../../shared/iprofile.props';
 
 export default function UpdateEmployee() {
     const navigate = useNavigate();
     const patientId = useParams()
+    const [profile, setProfile] = useState<number>(0)
     const [id, setId] = useState<number>(0)
     const [name, setName] = useState<string>('')
     const [cpf, setCpf] = useState<number>(0)
@@ -23,6 +25,7 @@ export default function UpdateEmployee() {
     const [city, setCity] = useState<string>('')
     const [state, setState] = useState<string>('')
     const [idUser, setIdUser] = useState<number | undefined>(undefined)
+    const [profiles, setProfiles] = useState<Array<IProfileProps> | null>(null)
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -30,7 +33,7 @@ export default function UpdateEmployee() {
     useEffect(() => {
         const elems = document.querySelectorAll('select');
         M.FormSelect.init(elems);
-        async function getPatientForUpdate() {
+        async function getEmployeeForUpdate() {
             const response = await Api.get(`employee/${patientId.id}`)
             setId(response.data.id)
             setName(response.data.name)
@@ -47,8 +50,16 @@ export default function UpdateEmployee() {
             setEmail(response.data.user.email_cellphone)
             setPassword(response.data.user.password)
         }
-        getPatientForUpdate()
+        getEmployeeForUpdate()
+        getProfiles()
     },[patientId.id])
+
+    async function getProfiles() {
+        const response = await Api.get('rules/profile')
+        setProfiles(response.data)
+        const elems = document.querySelectorAll('select');
+        M.FormSelect.init(elems);
+    }
 
     async function handleUpdate(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -99,9 +110,15 @@ export default function UpdateEmployee() {
             setCity(response.data.localidade)
             setState(response.data.uf)
         }
-      }
+    }
 
-    function handleGoBack(){        
+    function handleChange(e: any) {
+        let {value} = e.target;
+        setProfile(value)
+    }
+
+    function handleGoBack(e: any){
+        e.preventDefault();
         navigate(-1)
     }
 
@@ -131,13 +148,10 @@ export default function UpdateEmployee() {
                                         <div className="col s12">
                                             <div className="row">
                                                 <div className="input-field col s12">
-                                                    <select name='perfil'>
-                                                        <option value="1">Administrador</option>
-                                                        <option value="2">Recepicionista</option>
-                                                        <option value="3">Agentes de Saúde</option>
-                                                        <option value="4">Médicos</option>
-                                                        <option value="5">Dentistas</option>
-                                                        <option value="6">Enfermeiros</option>
+                                                    <select name='perfil' onChange={handleChange}>
+                                                        {profiles?.map((value) => 
+                                                            <option value={value.id}>{value.profile}</option>
+                                                        )}
                                                     </select>
                                                     <label>Selecione o perfil do usuário</label>
                                                 </div>
@@ -198,7 +212,7 @@ export default function UpdateEmployee() {
                                             </div>
                                             <div className='row'>
                                                 <div className='col s12'>
-                                                    <Button isLoading={false} className='btn waves-effect waves-light gradient-45deg-red-pink left'>
+                                                    <Button onClick={handleGoBack} isLoading={false} className='btn waves-effect waves-light gradient-45deg-red-pink left'>
                                                         <i className="material-icons left">arrow_back</i> Voltar
                                                     </Button>
                                                     <Button isLoading={isLoading} className='btn waves-effect waves-light gradient-45deg-indigo-blue right'>

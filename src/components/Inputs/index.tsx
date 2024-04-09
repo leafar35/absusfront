@@ -12,7 +12,7 @@ export function Input({icon, label, ...rest}: InputProps){
     return (
         <>
             {icon && (<i className="material-icons prefix pt-2">{icon}</i>)}
-            <input {...rest} />
+            <input {...rest} autoComplete="off" />
             <label htmlFor={label} className="center-align">{label}</label>
         </>
     )

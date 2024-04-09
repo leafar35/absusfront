@@ -14,6 +14,7 @@ import Employee from '../pages/employee';
 import CreateEmployee from '../pages/employee/Create';
 import UpdateEmployee from '../pages/employee/Update';
 import { CalendarPage } from '../pages/Calendar';
+import Profile from '../pages/profile';
 
 export default function AppRoutes(){
     return (
@@ -31,6 +32,7 @@ export default function AppRoutes(){
                     <Route path="/patients/create" element={<CreatePatient />} />
                     <Route path="/patients/update/:id" element={<UpdatePatient />} />
                     <Route path="/calendary" element={<CalendarPage />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Route>
             </Routes>
         </BrowserRouter>

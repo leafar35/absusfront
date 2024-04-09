@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 export function MainHeader(){
     const { sigOuth } = useContext(AuthContext)
@@ -73,9 +74,9 @@ export function MainHeader(){
                         </ul>
                         <ul className="dropdown-content" id="profile-dropdown">
                             <li>
-                                <a className="grey-text text-darken-1" href="user-profile-page.html">
+                                <Link to="profile" className="grey-text text-darken-1">
                                     <i className="material-icons">person_outline</i> Perfil
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <a className="grey-text text-darken-1" href="page-faq.html">

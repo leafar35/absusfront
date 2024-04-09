@@ -71,7 +71,8 @@ const CreatePatient: React.FC = () => {
         }
     }
 
-    function handleGoBack(){        
+    function handleGoBack(e: any){
+        e.preventDefault();
         navigate(-1)
     }
 
@@ -165,7 +166,7 @@ const CreatePatient: React.FC = () => {
                                             </div>
                                             <div className='row'>
                                                 <div className='col s12'>
-                                                    <Button isLoading={false} className='btn waves-effect waves-light gradient-45deg-red-pink left'>
+                                                    <Button onClick={handleGoBack} isLoading={false} className='btn waves-effect waves-light gradient-45deg-red-pink left'>
                                                         <i className="material-icons left">arrow_back</i> Voltar
                                                     </Button>
                                                     <Button isLoading={isLoading} className='btn waves-effect waves-light gradient-45deg-indigo-blue right'>
