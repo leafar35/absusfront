@@ -135,53 +135,53 @@ const CreatePatient: React.FC = () => {
                                         <div className="col s12">
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='Nome' type='text' name='name' value={name} />
+                                                    <Input label='Nome' type='text' name='name' value={name} onChange={(e: any) => setName(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='CPF' type='text' name='cpf' value={cpf.toString()} />
+                                                    <Input label='CPF' type='text' name='cpf' value={cpf.toString()} onChange={(e: any) => setCpf(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='Data de nascimento' type='text' name='dateofbirth' value={dateofbirth} />
+                                                    <Input label='Data de nascimento' type='text' name='dateofbirth' value={dateofbirth} onChange={(e: any) => setDateOfBirth(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='CEP' type='text' name='zipcode' onBlur={findAddress} value={zipcode} />
+                                                    <Input label='CEP' type='text' name='zipcode' onBlur={findAddress} value={zipcode} onChange={(e: any) => setZipcode(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='Endereço' type='text' name='address' value={address} />
+                                                    <Input label='Endereço' type='text' name='address' value={address} onChange={(e: any) => setAddress(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s11">
-                                                    <Input label='Bairro' type='text' name='neighborhood' value={neighborhood} />
+                                                    <Input label='Bairro' type='text' name='neighborhood' value={neighborhood} onChange={(e: any) => setNeighborhood(e.target.value)} />
                                                 </div>
                                                 <div className="input-field col s1">
-                                                    <Input label='Número' type='text' name='numero' value={number.toString()} />
+                                                    <Input label='Número' type='text' name='numero' value={number.toString()} onChange={(e: any) => setNumber(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='Complemento' type='text' name='complement' value={complment} />
+                                                    <Input label='Complemento' type='text' name='complement' value={complment} onChange={(e: any) => setComplment(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s11">
-                                                    <Input label='Cidade' type='text' name='city' value={city} />
+                                                    <Input label='Cidade' type='text' name='city' value={city} onChange={(e: any) => setCity(e.target.value)} />
                                                 </div>
                                                 <div className="input-field col s1">
-                                                    <Input label='Estado' type='text' name='state' value={state} />
+                                                    <Input label='Estado' type='text' name='state' value={state} onChange={(e: any) => setState(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s6">
-                                                    <Input label='e-mail' type='text' name='email' value={email} />
+                                                    <Input label='e-mail' type='text' name='email' value={email} onChange={(e: any) => setEmail(e.target.value)} />
                                                 </div>
                                                 <div className="input-field col s6">
                                                     <Input label='password' type='password' name='password' />

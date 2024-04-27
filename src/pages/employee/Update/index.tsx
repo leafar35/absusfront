@@ -150,7 +150,7 @@ export default function UpdateEmployee() {
                                             <div className="row">
                                                 <div className="input-field col s12">
                                                     <select name='perfil' onChange={handleChange}>
-                                                        {profiles?.map((value) => 
+                                                        {profiles?.map((value) =>
                                                             <option value={value.id}>{value.profile}</option>
                                                         )}
                                                     </select>
@@ -159,12 +159,12 @@ export default function UpdateEmployee() {
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='Nome' type='text' name='name' value={name} />
+                                                    <Input label='Nome' type='text' name='name' value={name} onChange={(e: any) => setName(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='CPF' type='text' name='cpf' value={cpf.toString()} />
+                                                    <Input label='CPF' type='text' name='cpf' value={cpf.toString()} onChange={(e: any) => setCpf(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>

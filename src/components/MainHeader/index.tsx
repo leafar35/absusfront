@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import { DivSearchTop } from "./styles";
 
 export function MainHeader(){
     const { sigOuth } = useContext(AuthContext)
@@ -29,13 +30,14 @@ export function MainHeader(){
 
     return (
         <header className="page-topbar" id="header">
-            <div className="navbar navbar-fixed"> 
+            <div className="navbar navbar-fixed">
                 <nav className="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-indigo-blue no-shadow">
                     <div className="nav-wrapper">
-                        <div className="header-search-wrapper hide-on-med-and-down"><i className="material-icons">search</i>
-                            <input className="header-search-input z-depth-2" type="text" name="Search" placeholder="Explore Materialize" data-search="template-list" />
+                        <DivSearchTop className="header-search-wrapper hide-on-med-and-down">
+                            <i className="material-icons">search</i>
+                            <input className="header-search-input z-depth-2" type="text" name="Search" placeholder="Buscar no sistema" data-search="template-list" />
                             <ul className="search-list collection display-none"></ul>
-                        </div>
+                        </DivSearchTop>
                         <ul className="navbar-list right">
                             <li className="hide-on-large-only search-input-wrapper">
                                 <a className="waves-effect waves-block waves-light search-button" href="javascript:void(0);">

@@ -12,11 +12,11 @@ export function Aside(){
     <aside className="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square">
       <div className="brand-sidebar">
         <h1 className="logo-wrapper">
-          <a className="brand-logo darken-1" href="index.html">
-            <img style={{'height': '35px'}} className="hide-on-med-and-down" src="./logo.png" alt="materialize logo"/>
+          <Link to={'/'} className="brand-logo darken-1">
+            <img style={{'height': '18px'}} className="hide-on-med-and-down" src="./logo.png" alt="materialize logo"/>
             <img className="show-on-medium-and-down hide-on-med-and-up" src="./logo.png" alt="materialize logo"/>
             <span style={{fontSize: '1.4rem'}} className="logo-text hide-on-med-and-down">Agendamentos</span>
-          </a>
+          </Link>
           {/* <a className="navbar-toggler" href="#">
             <i className="material-icons">radio_button_checked</i>
           </a> */}
