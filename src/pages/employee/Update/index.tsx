@@ -63,6 +63,7 @@ export default function UpdateEmployee() {
 
     async function handleUpdate(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        setIsLoading(true)
         try{
             let employee: IEmployee
             employee = {
@@ -85,12 +86,21 @@ export default function UpdateEmployee() {
                 }
             }
             await Api.put('employee', employee)
-            return Swal.fire({
+            Swal.fire({
                 title: 'Funcionário atualizado!',
                 icon: 'success',
             })
+            setIsLoading(false)
+            navigate('/schedules')
         }catch(e){
+            setIsLoading(false)
             if(e instanceof AxiosError){
+                if(e.response?.status == 403){
+                    return Swal.fire({
+                        title: 'Seu perfil não tem atribuição para atualizar funcionários',
+                        icon: 'error',
+                    })
+                }
                 const html = `<div style="text-align: justify;">${e.response?.data.message.join('<Br />')}</div>`
                 Swal.fire({
                     title: 'Corrija os seguinte erros!',
@@ -169,43 +179,43 @@ export default function UpdateEmployee() {
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='Data de nascimento' type='text' name='dateofbirth' value={dateofbirth} />
+                                                    <Input label='Data de nascimento' type='text' name='dateofbirth' value={dateofbirth} onChange={(e: any) => setDateOfBirth(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='CEP' type='text' name='zipcode' onBlur={findAddress} value={zipcode} />
+                                                    <Input label='CEP' type='text' name='zipcode' onBlur={findAddress} value={zipcode} onChange={(e: any) => setZipcode(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='Endereço' type='text' name='address' value={address} />
+                                                    <Input label='Endereço' type='text' name='address' value={address} onChange={(e: any) => setAddress(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s11">
-                                                    <Input label='Bairro' type='text' name='neighborhood' value={neighborhood} />
+                                                    <Input label='Bairro' type='text' name='neighborhood' value={neighborhood} onChange={(e: any) => setNeighborhood(e.target.value)} />
                                                 </div>
                                                 <div className="input-field col s1">
-                                                    <Input label='Número' type='text' name='numero' value={number.toString()} />
+                                                    <Input label='Número' type='text' name='numero' value={number.toString()} onChange={(e: any) => setNumber(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s12">
-                                                    <Input label='Complemento' type='text' name='complement' value={complment} />
+                                                    <Input label='Complemento' type='text' name='complement' value={complment} onChange={(e: any) => setComplment(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s11">
-                                                    <Input label='Cidade' type='text' name='city' value={city} />
+                                                    <Input label='Cidade' type='text' name='city' value={city} onChange={(e: any) => setCity(e.target.value)} />
                                                 </div>
                                                 <div className="input-field col s1">
-                                                    <Input label='Estado' type='text' name='state' value={state} />
+                                                    <Input label='Estado' type='text' name='state' value={state} onChange={(e: any) => setState(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className='row'>
                                                 <div className="input-field col s6">
-                                                    <Input label='e-mail' type='text' name='email' value={email} />
+                                                    <Input label='e-mail' type='text' name='email' value={email} onChange={(e: any) => setEmail(e.target.value)} />
                                                 </div>
                                                 <div className="input-field col s6">
                                                     <Input label='password' type='password' name='password' />

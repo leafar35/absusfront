@@ -73,16 +73,16 @@ const List: React.FC = () => {
         })
     }
 
-    const status = async () => {
+    const status = async (id: number| undefined) => {
         Swal.fire({
-            title: 'Deseja mesmo deletar?',
+            title: 'Compareceu no horário marcado?',
             icon: 'question'
         }).then(async(value) => {
             if(value.isConfirmed){
-                const response = await Api.put(`schedule/status`)
+                const response = await Api.put(`schedule/status/${id}`)
                 getSchedule()
                 if(response.data)
-                    return Swal.fire('Deletado com sucesso','','success')
+                    return Swal.fire('Atualizado com sucesso','','success')
                 Swal.fire('Erro ao deletar','','error')
             }
         })
@@ -103,7 +103,7 @@ const List: React.FC = () => {
                                 <a href='javascript:void(0)' onClick={() => deleteAsync(id)} title='Deletar esse agendamento?'>
                                     <i className="material-icons">delete</i>
                                 </a>
-                                <a href='javascript:void(0)' onClick={() => status()} title='Compareceu'>
+                                <a href='javascript:void(0)' onClick={() => status(id)} title='Compareceu'>
                                     <i className="material-icons">{row.appear ? 'check_box' : 'check_box_outline_blank'}</i>
                                 </a>
                             </>

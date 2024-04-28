@@ -43,6 +43,7 @@ export default function CreateSchedule(){
     async function handleCreate(event: any) {
         event.preventDefault();
         let schedule: ISchedule
+        setIsLoading(true)
         try {
             schedule = {
                 title: event.target[2].value,
@@ -53,12 +54,21 @@ export default function CreateSchedule(){
                 peopleId: event.target[1].value
             }
             await Api.post('schedule', schedule)
-            return Swal.fire({
+            Swal.fire({
                 title: 'Agendamento cadastrado!',
                 icon: 'success',
             })
+            setIsLoading(false)
+            return navigate('/schedules')
         }catch(e){
+            setIsLoading(false)
             if(e instanceof AxiosError){
+                if(e.response?.status == 403){
+                    return Swal.fire({
+                        title: 'Seu perfil não tem atribuição para agendar uma consulta',
+                        icon: 'error',
+                    })
+                }
                 const html = `<div style="text-align: justify;">${e.response?.data.message.join('<Br />')}</div>`
                 Swal.fire({
                     title: 'Corrija os seguinte erros!',
@@ -69,7 +79,8 @@ export default function CreateSchedule(){
         }        
     }
 
-    function handleGoBack(){        
+    function handleGoBack(e: any){
+        e.preventDefault();
         navigate(-1)
     }
 
@@ -134,7 +145,7 @@ export default function CreateSchedule(){
                                             </div>
                                             <div className='row'>
                                                 <div className='col s12'>
-                                                    <Button isLoading={false} className='btn waves-effect waves-light gradient-45deg-red-pink left'>
+                                                    <Button onClick={handleGoBack} isLoading={false} className='btn waves-effect waves-light gradient-45deg-red-pink left'>
                                                         <i className="material-icons left">arrow_back</i> Voltar
                                                     </Button>
                                                     <Button isLoading={isLoading} className='btn waves-effect waves-light gradient-45deg-indigo-blue right'>

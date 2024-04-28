@@ -1,7 +1,10 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
+import { isShowLinkTo } from "../../utils/isShow.Link.to";
 
 export function Aside(){
+  const context = useContext(AuthContext)
   useEffect(() => {
     var elems = document.querySelectorAll('.sidenav');
     M.Sidenav.init(elems, {});
@@ -29,75 +32,81 @@ export function Aside(){
             <span className="menu-title" data-i18n="Dashboard">Dashboard</span>
           </Link>
         </li>
-        <li className="bold">
-          <a className="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
-            <i className="material-icons">person</i>
-            <span className="menu-title" data-i18n="Authentication">Funcionários</span>
-            <span className="badge badge pill purple float-right mr-10">2</span>
-          </a>
-          <div className="collapsible-body">
-            <ul className="collapsible collapsible-sub" data-collapsible="accordion">
-              <li>
-                <Link to="/employees">
-                  <i className="material-icons">radio_button_unchecked</i>
-                  <span data-i18n="Login">Listagem</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/employees/create">
-                  <i className="material-icons">radio_button_unchecked</i>
-                  <span data-i18n="Login">Cadastrar</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li className="bold">
-          <a className="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
-            <i className="material-icons">people</i>
-            <span className="menu-title" data-i18n="Authentication">Pacientes</span>
-            <span className="badge badge pill purple float-right mr-10">2</span>
-          </a>
-          <div className="collapsible-body">
-            <ul className="collapsible collapsible-sub" data-collapsible="accordion">
-              <li>
-                <Link to="/patients">
-                  <i className="material-icons">radio_button_unchecked</i>
-                  <span data-i18n="Login">Listagem</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/patients/create">
-                  <i className="material-icons">radio_button_unchecked</i>
-                  <span data-i18n="Login">Cadastrar</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li className="bold">
-          <a className="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
-            <i className="material-icons">access_time</i>
-            <span className="menu-title" data-i18n="Authentication">Agendamentos</span>
-            <span className="badge badge pill purple float-right mr-10">2</span>
-          </a>
-          <div className="collapsible-body">
-            <ul className="collapsible collapsible-sub" data-collapsible="accordion">
-              <li>
-                <Link to="schedules">
-                  <i className="material-icons">radio_button_unchecked</i>
-                  <span data-i18n="Login">Listagem</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="schedules/create">
-                  <i className="material-icons">radio_button_unchecked</i>
-                  <span data-i18n="Login">Cadastrar</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </li>
+        {isShowLinkTo(context?.profile?.profile, context?.profile?.rules, 'employee') && (
+          <li className="bold">
+            <a className="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
+              <i className="material-icons">person</i>
+              <span className="menu-title" data-i18n="employee">Funcionários</span>
+              <span className="badge badge pill purple float-right mr-10">2</span>
+            </a>
+            <div className="collapsible-body">
+              <ul className="collapsible collapsible-sub" data-collapsible="accordion">
+                <li>
+                  <Link to="/employees">
+                    <i className="material-icons">radio_button_unchecked</i>
+                    <span data-i18n="Login">Listagem</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/employees/create">
+                    <i className="material-icons">radio_button_unchecked</i>
+                    <span data-i18n="Login">Cadastrar</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+        )}
+        {isShowLinkTo(context?.profile?.profile, context?.profile?.rules, 'people') && (
+          <li className="bold">
+            <a className="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
+              <i className="material-icons">people</i>
+              <span className="menu-title" data-i18n="patients">Pacientes</span>
+              <span className="badge badge pill purple float-right mr-10">2</span>
+            </a>
+            <div className="collapsible-body">
+              <ul className="collapsible collapsible-sub" data-collapsible="accordion">
+                <li>
+                  <Link to="/patients">
+                    <i className="material-icons">radio_button_unchecked</i>
+                    <span data-i18n="patients:list">Listagem</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/patients/create">
+                    <i className="material-icons">radio_button_unchecked</i>
+                    <span data-i18n="patients:create">Cadastrar</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+        )}
+        {isShowLinkTo(context?.profile?.profile, context?.profile?.rules, 'schedule') && (
+          <li className="bold">
+            <a className="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
+              <i className="material-icons">access_time</i>
+              <span className="menu-title" data-i18n="schedules">Agendamentos</span>
+              <span className="badge badge pill purple float-right mr-10">2</span>
+            </a>
+            <div className="collapsible-body">
+              <ul className="collapsible collapsible-sub" data-collapsible="accordion">
+                <li>
+                  <Link to="schedules">
+                    <i className="material-icons">radio_button_unchecked</i>
+                    <span data-i18n="schedules:list">Listagem</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="schedules/create">
+                    <i className="material-icons">radio_button_unchecked</i>
+                    <span data-i18n="schedules:create">Cadastrar</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+        )}
         <li className="bold">
           <Link to="/calendary">
             <i className="material-icons">today</i><span className="menu-title" data-i18n="Calendar">Calendário</span>

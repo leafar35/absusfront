@@ -11,5 +11,7 @@ export interface IProfileEntity {
     complement: string
     city: string
     state: string
-    user: IUserEntity
+    user: IUserEntity,
+    rules?: [],
+    profile?: string
 }

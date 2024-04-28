@@ -2,10 +2,25 @@ import { useEffect, useState } from "react"
 import { Container } from "./styles"
 import Api from "../../services/api"
 import { ISchedule } from "../../shared/ischedule";
+import BarChartBox from "../../components/Barchart";
 
 export function Dashboard() {
     const [today, setToday] = useState<ISchedule[]>([]);
     const [attend, setAttend] = useState<ISchedule[]>([]);
+    const [statistics, setStatistics] = useState([
+        {
+          name: '7:30 a 12:00',
+          uv: 4000,
+          pv: 2400,
+          amt: 2400,
+        },
+        {
+          name: '13:30 a 18:00',
+          uv: 3000,
+          pv: 1398,
+          amt: 2210,
+        },        
+      ])
 
     useEffect(() => {
         async function notAttend() {
@@ -33,7 +48,7 @@ export function Dashboard() {
                             <ul className="collection mb-0">
                                 {attend ? attend.map(object => 
                                     <li className="collection-item avatar">
-                                        <img src="./avatar/avatar-7.png" alt="" className="circle" />
+                                        <i className="material-icons circle">person</i>
                                         <p className="font-weight-600">{object.people?.name}</p>
                                         <p className="medium-small">{object.dateTime.toString()}</p>
                                         <a href="#!" className="secondary-content">
@@ -83,6 +98,9 @@ export function Dashboard() {
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div className="col s12">
+                    <BarChartBox data={statistics} />
                 </div>
             </div>
         </Container>

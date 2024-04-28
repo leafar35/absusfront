@@ -54,6 +54,7 @@ const CreatePatient: React.FC = () => {
 
     async function handleUpdate(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        setIsLoading(true)
         try{
             let patient: IPatient
             patient = {
@@ -77,12 +78,21 @@ const CreatePatient: React.FC = () => {
                 }
             }
             await Api.put('people', patient)
-            return Swal.fire({
+            Swal.fire({
                 title: 'Paciente atualizado!',
                 icon: 'success',
             })
+            setIsLoading(false)
+            return navigate('/patients')
         }catch(e){
+            setIsLoading(false)
             if(e instanceof AxiosError){
+                if(e.response?.status == 403){
+                    return Swal.fire({
+                        title: 'Seu perfil não tem atribuição para atualizar pacientes',
+                        icon: 'error',
+                    })
+                }
                 const html = `<div style="text-align: justify;">${e.response?.data.message.join('<Br />')}</div>`
                 Swal.fire({
                     title: 'Corrija os seguinte erros!',

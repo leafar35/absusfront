@@ -33,6 +33,7 @@ export default function CreateEmployee(){
 
     async function handleCreate(e: any) {
         e.preventDefault();
+        setIsLoading(true)
         try{
             let employee: IEmployee
             employee = {
@@ -53,12 +54,21 @@ export default function CreateEmployee(){
                 }
             }
             await Api.post('employee', employee)
-            return Swal.fire({
+            Swal.fire({
                 title: 'Funcionário cadastado!',
                 icon: 'success',
             })
+            setIsLoading(false)
+            return navigate('/employees')
         }catch(e){
+            setIsLoading(false)
             if(e instanceof AxiosError){
+                if(e.response?.status == 403){
+                    return Swal.fire({
+                        title: 'Seu perfil não tem atribuição para criar funcionários',
+                        icon: 'error',
+                    })
+                }
                 const html = `<div style="text-align: justify;">${e.response?.data.message.join('<Br />')}</div>`
                 Swal.fire({
                     title: 'Corrija os seguinte erros!',
