@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 export const AuthContext = createContext<IAuthProvider>(null!);
 
 function AuthProvider({ children }: IChildrenAuthProvider) {
-    const [logged, setLogged] = useState<boolean>(false);
+    const [logged, setLogged] = useState<boolean>(() => { return localStorage.getItem('@absus:token-auth') !== null });
     const [accessToken, setAccessToken] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [profile, setProfile] = useState<IProfileEntity>(null!)
