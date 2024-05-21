@@ -17,14 +17,9 @@ export function CalendarPage(){
     return (
         <>
             <div className="section">
-                <div className="card">
-                    <div className="card-content">
-                    <p className="caption mb-0">Tables are a nice way to organize a lot of data. We provide a few utility classes to help
-                        you style your table as easily as possible. In addition, to improve mobile experience, all tables on
-                        mobile-screen widths are centered automatically.</p>
-                    </div>
+                <div className="card pt-1 pl-1 pr-1 pb-1">
+                    <Calendar data={data} />
                 </div>
-                <Calendar data={data} />
             </div>
         </>
     )

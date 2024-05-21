@@ -10,11 +10,15 @@ export const AuthContext = createContext<IAuthProvider>(null!);
 
 function AuthProvider({ children }: IChildrenAuthProvider) {
     const [logged, setLogged] = useState<boolean>(() => { return localStorage.getItem('@absus:token-auth') !== null });
-    const [accessToken, setAccessToken] = useState<string>('')
+    const [accessToken, setAccessToken] = useState<string | null>(localStorage.getItem('@absus:token-auth'))
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [profile, setProfile] = useState<IProfileEntity>(null!)
 
     useEffect(() => {
+        const setAuthorization = () => {
+            Api.defaults.headers.common['Authorization'] = `bearer ${accessToken}`
+            Auth.defaults.headers.common['Authorization'] = `bearer ${accessToken}`
+        }
         const getProfile = async() => {
             if(accessToken){
                 const {data} = await Auth.get('authemployee/me')
@@ -22,6 +26,7 @@ function AuthProvider({ children }: IChildrenAuthProvider) {
                 setIsLoading(false)
             }
         }
+        setAuthorization()
         getProfile()
     },[accessToken])
 

@@ -88,6 +88,21 @@ const List: React.FC = () => {
         })
     }
 
+    const alert_patient = async (id: number | undefined) => {
+        Swal.fire({
+            title: 'Chamar o paciente?',
+            icon: 'question'
+        }).then(async(value) => {
+            if(value.isConfirmed){
+                const response = await Api.put(`notifica/${id}`)
+                getSchedule()
+                if(response.data)
+                    return Swal.fire('Atualizado com sucesso','','success')
+                Swal.fire('Erro ao deletar','','error')
+            }
+        })
+    }
+
     return (
         <>
             {keysGridSchedule.length === 3 &&
@@ -105,6 +120,9 @@ const List: React.FC = () => {
                                 </a>
                                 <a href='javascript:void(0)' onClick={() => status(id)} title='Compareceu'>
                                     <i className="material-icons">{row.appear ? 'check_box' : 'check_box_outline_blank'}</i>
+                                </a>
+                                <a href='javascript:void(0)' onClick={() => alert_patient(id)} title='Avisar o paciente'>
+                                    <i className="material-icons">send</i>
                                 </a>
                             </>
                         )
