@@ -34,29 +34,29 @@ export default function UpdateEmployee() {
         const elems = document.querySelectorAll('select');
         M.FormSelect.init(elems);
         async function getEmployeeForUpdate() {
-            const response = await Api.get(`employee/${patientId.id}`)
-            setId(response.data.id)
-            setName(response.data.name)
-            setCpf(response.data.cpf)
-            setDateOfBirth(response.data.dateofbirth)
-            setZipcode(response.data.zipcode)
-            setAddress(response.data.address)
-            setNeighborhood(response.data.neighborhood)
-            setComplment(response.data.complement)
-            setNumber(response.data.number)
-            setCity(response.data.city)
-            setState(response.data.state)
-            setIdUser(response.data.user.id)
-            setEmail(response.data.user.email_cellphone)
-            setPassword(response.data.user.password)
+            const { data } = await Api.get(`employee/${patientId.id}`)
+            setId(data.data.id)
+            setName(data.data.name)
+            setCpf(data.data.cpf)
+            setDateOfBirth(data.data.dateofbirth)
+            setZipcode(data.data.zipcode)
+            setAddress(data.data.address)
+            setNeighborhood(data.data.neighborhood)
+            setComplment(data.data.complement)
+            setNumber(data.data.number)
+            setCity(data.data.city)
+            setState(data.data.state)
+            setIdUser(data.data.user.id)
+            setEmail(data.data.user.email_cellphone)
+            setPassword(data.data.user.password)
         }
         getEmployeeForUpdate()
         getProfiles()
     },[patientId.id])
 
     async function getProfiles() {
-        const response = await Api.get('rules/profile')
-        setProfiles(response.data)
+        const { data } = await Api.get('rules/profile')
+        setProfiles(data.data)
         const elems = document.querySelectorAll('select');
         M.FormSelect.init(elems);
     }

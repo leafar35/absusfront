@@ -28,8 +28,8 @@ export default function Employee(){
             }
         }
         setIsLoading(true)
-        const response = await Api.get(`employee${query}`)
-        setData(response.data)   
+        const { data } = await Api.get(`employee${query}`)
+        setData(data.data)   
         setIsLoading(false)
     }
 
@@ -39,9 +39,9 @@ export default function Employee(){
             icon: 'question'
         }).then(async(value) => {
             if(value.isConfirmed){
-                const response = await Api.delete(`/employee/${id}`)
+                const { data } = await Api.delete(`/employee/${id}`)
                 getEmployee()
-                if(response.data)
+                if(data.data)
                     return Swal.fire('Deletado com sucesso','','success')
                 Swal.fire('Erro ao deletar','','error')
             }

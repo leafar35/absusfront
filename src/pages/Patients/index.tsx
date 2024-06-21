@@ -27,8 +27,8 @@ export function Patients(){
             }
         }
         setIsLoading(true)
-        const response = await Api.get(`people${query}`)
-        setData(response.data)
+        const { data } = await Api.get(`people${query}`)
+        setData(data.data)
         setIsLoading(false)
     }
 
@@ -38,9 +38,9 @@ export function Patients(){
             icon: 'question'
         }).then(async(value) => {
             if(value.isConfirmed){
-                const response = await Api.delete(`people/${id}`)
+                const { data } = await Api.delete(`people/${id}`)
                 getPatients()
-                if(response.data)
+                if(data.data)
                     return Swal.fire('Deletado com sucesso','','success')
                 Swal.fire('Erro ao deletar','','error')
             }

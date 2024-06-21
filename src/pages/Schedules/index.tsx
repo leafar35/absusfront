@@ -21,8 +21,8 @@ const List: React.FC = () => {
     },[])
 
     async function getPatients(){
-        const response = await Api.get('people')
-        const usermap = response.data.data.map((people: IPeople) => {
+        const { data } = await Api.get('people')
+        const usermap = data.data.data.map((people: IPeople) => {
             return { label: people.name, value: people.id} 
         })
         setOptions(usermap)
@@ -32,7 +32,7 @@ const List: React.FC = () => {
         return Api.get(`people?name=${name}`)
           .then((people: any) => {
             let options: any[] = []
-            people.data.data.forEach((people: IPeople) => {
+            people.data.data.data.forEach((people: IPeople) => {
               options.push({
                 label: people.name,
                 value: people.id
@@ -53,8 +53,8 @@ const List: React.FC = () => {
             }
         }
         setIsLoading(true)
-        const response = await Api.get(`schedule${query}`)
-        setData(response.data)
+        const { data } = await Api.get(`schedule${query}`)
+        setData(data.data)
         setIsLoading(false)
     }
 

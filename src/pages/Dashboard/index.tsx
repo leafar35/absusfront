@@ -20,16 +20,16 @@ export function Dashboard() {
           pv: 1398,
           amt: 2210,
         },        
-      ])
+    ])
 
     useEffect(() => {
         async function notAttend() {
-            const response = await Api.get('schedule/notAttend/all')
-            setAttend(response.data.data)
+            const { data } = await Api.get('schedule/notAttend/all')
+            setAttend(data.data.data)
         }
         async function today() {
-            const response = await Api.get('schedule/today/all')
-            setToday(response.data.data)
+            const { data } = await Api.get('schedule/today/all')
+            setToday(data.data.data)
         }
         notAttend()
         today()

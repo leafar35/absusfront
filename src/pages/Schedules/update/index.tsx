@@ -26,23 +26,23 @@ const Updatechedule: React.FC = () => {
 
     useEffect(() => {
         async function getPatients(){
-            const response = await Api.get('people')
-            const usermap = response.data.data.map((people: IPeople) => {
+            const { data } = await Api.get('people')
+            const usermap = data.data.data.map((people: IPeople) => {
                 return { label: people.name, value: people.id} 
             })
             setOptions(usermap)
         }
 
         async function getSchedule(){
-            const response = await Api.get(`schedule/${scheduleId.id}`)
-            setId(response.data.id)
-            setTitle(response.data.title)
-            setDescription(response.data.description)
-            setDateTime(response.data.dateTime)
-            setlocalization(response.data.localization)
-            setGooleMapsLink(response.data.google_maps_link)
-            setPeopleId(response.data.people.id)
-            setValueDefault({label: response.data.people.name, value: response.data.people.id})
+            const { data } = await Api.get(`schedule/${scheduleId.id}`)
+            setId(data.data.id)
+            setTitle(data.data.title)
+            setDescription(data.data.description)
+            setDateTime(data.data.dateTime)
+            setlocalization(data.data.localization)
+            setGooleMapsLink(data.data.google_maps_link)
+            setPeopleId(data.data.people.id)
+            setValueDefault({label: data.data.people.name, value: data.data.people.id})
         }
 
         getSchedule()
@@ -53,7 +53,7 @@ const Updatechedule: React.FC = () => {
         return Api.get(`people?name=${name}`)
           .then((people: any) => {
             let options: any[] = []
-            people.data.forEach((people: IPeople) => {
+            people.data.data.data.forEach((people: IPeople) => {
               options.push({
                 label: people.name,
                 value: people.id

@@ -25,8 +25,8 @@ export default function CreateEmployee(){
     },[])
 
     async function getProfiles() {
-        const response = await Api.get('rules/profile')
-        setProfiles(response.data)
+        const { data } = await Api.get('rules/profile')
+        setProfiles(data.data)
         const elems = document.querySelectorAll('select');
         M.FormSelect.init(elems);
     }

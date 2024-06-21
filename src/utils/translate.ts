@@ -22,6 +22,9 @@ const Translate = (value: string): string => {
         case 'update':
             title = 'Atualizar'
             break
+        case 'rules':
+            title = 'Regras de Acesso'
+            break
     }
     return title
 }

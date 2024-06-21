@@ -9,7 +9,7 @@ export function CalendarPage(){
     useEffect(() => {
         async function getSchedule() {
             const response = await Api.get('schedule')
-            setData(response.data.data)
+            setData(response.data.data.data)
         }
         getSchedule()
     },[])
