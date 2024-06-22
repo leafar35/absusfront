@@ -94,7 +94,7 @@ const List: React.FC = () => {
             icon: 'question'
         }).then(async(value) => {
             if(value.isConfirmed){
-                const response = await Api.put(`notifica/${id}`)
+                const response = await Api.put(`schedule/notify/${id}`)
                 getSchedule()
                 if(response.data)
                     return Swal.fire('Atualizado com sucesso','','success')
