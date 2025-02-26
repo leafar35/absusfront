@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 export const AuthContext = createContext<IAuthProvider>(null!);
 
 function AuthProvider({ children }: IChildrenAuthProvider) {
+    const [region, setRegion] = useState<boolean>(() => { return localStorage.getItem('@absus:choice-regtion') !== null });
     const [logged, setLogged] = useState<boolean>(() => { return localStorage.getItem('@absus:token-auth') !== null });
     const [accessToken, setAccessToken] = useState<string | null>(localStorage.getItem('@absus:token-auth'))
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -72,10 +73,17 @@ function AuthProvider({ children }: IChildrenAuthProvider) {
         window.location.replace('/')
     }
 
+    const setRegionId = (value: string) => {
+        setRegion(true)
+        localStorage.setItem('@absus:choice-regtion', value)
+    }
+
     return (
         <AuthContext.Provider 
             value={{
-                logged, 
+                logged,
+                region,
+                setRegionId,
                 signIn, 
                 sigOuth, 
                 profile, 

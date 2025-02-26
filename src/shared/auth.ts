@@ -7,6 +7,8 @@ export interface IChildrenAuthProvider {
 
 export interface IAuthProvider {
     logged: Boolean,
+    region: Boolean,
+    setRegionId(value: string): void,
     signIn(inputData: object): void,
     sigOuth(): void,
     profile: IProfileEntity
