@@ -40,10 +40,8 @@ export function RegionChoice() {
                                         <Select
                                             name='regionId' 
                                             placeholder='Selecione o bairro de atendimento!' 
-                                            options={[{ value: 'vanilla', label: 'Vanilla'},
-                                                { value: 'chocolate', label: 'Chocolate'},
-                                                { value: 'strawberry', label: 'Strawberry'},
-                                                { value: 'salted-caramel', label: 'Salted Caramel'}]}
+                                            options={[{ value: 'Centro', label: 'Centro'},
+                                                { value: 'Vila Real', label: 'Vila Real'}]}
                                             styles={customStyles}
                                             menuPortalTarget={document.body}
                                         />

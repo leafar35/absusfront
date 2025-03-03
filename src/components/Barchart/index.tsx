@@ -19,7 +19,7 @@ const BarChartBox: React.FC<IBarcharBoxProps> = ({
                                 <li className="collection-item avatar">
                                 <i className="material-icons circle pink accent-2">trending_up</i>
                                 <p className="medium-small">Não compareceu</p>
-                                <h5 className="mt-0 mb-0">60%</h5>
+                                <h5 className="mt-0 mb-0">25%</h5>
                                 </li>
                             </ul>
                         </div>
@@ -51,9 +51,9 @@ const BarChartBox: React.FC<IBarcharBoxProps> = ({
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                                <Bar dataKey="pv" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-                                <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
-                            </BarChart>
+                            <Bar dataKey="compareceram" fill="#82ca9d" />
+                            <Bar dataKey="nao_compareceram" fill="#ff6f61" />
+                            </BarChart>                            
                         </ResponsiveContainer>
                     </div>
                 </div>

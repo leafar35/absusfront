@@ -106,14 +106,7 @@ export function Aside(){
               </ul>
             </div>
           </li>
-        )}
-        {isShowLinkTo(context?.profile?.profile, context?.profile?.rules, 'profile') && (
-          <li className="bold">
-            <Link to="/rules">
-              <i className="material-icons">verified_user</i><span className="menu-title" data-i18n="rules">Regras de Acesso</span>
-            </Link>
-          </li>
-        )}
+        )}        
         <li className="bold">
           <Link to="/calendary">
             <i className="material-icons">today</i><span className="menu-title" data-i18n="Calendar">Calendário</span>

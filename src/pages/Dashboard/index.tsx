@@ -9,17 +9,15 @@ export function Dashboard() {
     const [attend, setAttend] = useState<ISchedule[]>([]);
     const [statistics, setStatistics] = useState([
         {
-          name: '7:30 a 12:00',
-          uv: 4000,
-          pv: 2400,
-          amt: 2400,
+          "name": "7:30 a 12:00",
+          "compareceram": 150,
+          "nao_compareceram": 50
         },
         {
-          name: '13:30 a 18:00',
-          uv: 3000,
-          pv: 1398,
-          amt: 2210,
-        },        
+          "name": "13:30 a 18:00",
+          "compareceram": 120,
+          "nao_compareceram": 80
+        }
     ])
 
     useEffect(() => {
@@ -76,7 +74,7 @@ export function Dashboard() {
                                 <tr>
                                     <th>Nome</th>
                                     <th>Telefone</th>
-                                    <th>#</th>
+                                    <th className="center-align">#</th>
                                 </tr>
                             </thead>
                             <tbody>

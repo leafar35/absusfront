@@ -11,7 +11,7 @@ export const keysGrid: TableColumn<IPeople>[] = [
         selector: row => row?.dateofbirth?.toString(),
     },
     {
-        name: 'Email',
+        name: 'Telefone',
         selector: row => row?.user.email_cellphone,
     },
 ]

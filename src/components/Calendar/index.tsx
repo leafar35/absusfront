@@ -28,7 +28,14 @@ export function Calendar({data}: IDataISchedule){
             plugins={[ dayGridPlugin ]}
             initialView="dayGridMonth"
             events={data.map((value) => {
-                return {title: value.title, start: value.dateTime}
+                const date = value.dateTime.toString().split(' ');
+                const dateParts = date[0].split('/');
+                const formattedDateTime = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}T${date[1]}`;
+                
+                return { 
+                    title: value.title, 
+                    start: formattedDateTime 
+                };
             })}
             eventClick={alertEventContent}
         />
