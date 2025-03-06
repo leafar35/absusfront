@@ -14,10 +14,15 @@ const List: React.FC = () => {
     const [data, setData] = useState<IPagination>();
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [options, setOptions] = useState<Array<IOptionProps>>([])
+    const [currentTime, setCurrentTime] = useState(Date.now());
 
     useEffect(() => {        
         getSchedule()
         getPatients()
+        const interval = setInterval(() => {
+            setCurrentTime(Date.now());
+        }, 60000);      
+        return () => clearInterval(interval);
     },[])
 
     async function getPatients(){
@@ -105,30 +110,6 @@ const List: React.FC = () => {
 
     return (
         <>
-            {keysGridSchedule.length === 3 &&
-                keysGridSchedule.push({
-                    name: '#',
-                    cell(row) {
-                        const id = (row?.id) ? row.id : undefined
-                        return (
-                            <>
-                                <Link to={'update/'+id} title='Atualizar esse agendamento'>
-                                    <i className="material-icons">edit</i>
-                                </Link>
-                                <a href='javascript:void(0)' onClick={() => deleteAsync(id)} title='Deletar esse agendamento?'>
-                                    <i className="material-icons">delete</i>
-                                </a>
-                                <a href='javascript:void(0)' onClick={() => status(id)} title='Compareceu'>
-                                    <i className="material-icons">{row.appear ? 'check_box' : 'check_box_outline_blank'}</i>
-                                </a>
-                                <a href='javascript:void(0)' onClick={() => alert_patient(id)} title='Avisar o paciente'>
-                                    <i className="material-icons">send</i>
-                                </a>
-                            </>
-                        )
-                    },
-                })
-            }
             <div className="section">
                 <div className="card">
                     <div className="card-content">
@@ -155,7 +136,7 @@ const List: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                {data && <Grid data={data} fetchData={getSchedule} columns={keysGridSchedule} title='Agendamentos' />}
+                {data && <Grid data={data} fetchData={getSchedule} columns={keysGridSchedule(currentTime, deleteAsync, status, alert_patient)} title='Agendamentos' />}
             </div>
         </>
     );
